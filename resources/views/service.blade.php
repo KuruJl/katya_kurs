@@ -313,6 +313,26 @@
             white-space: nowrap;
             border: 0;
         }
+        .button {
+            display: block; /* Занимает всю доступную ширину по умолчанию */
+            width: 100%; /* Важно для блочного элемента в flex-контейнере */
+            max-width: 600px; /* Максимальная ширина кнопки */
+            padding: 15px 20px; /* Внутренние отступы */
+            border-radius: 15px;
+            background-color: #da6886;
+            color: #fff;
+            text-decoration: none; /* Убираем подчеркивание у ссылок */
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 20px;
+            letter-spacing: 5px;
+            text-transform: uppercase; /* Можно сделать заглавными буквами */
+            text-align: center;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+        }
+
     </style>
 </head>
 <body>
@@ -332,7 +352,15 @@
             <div class="service-details">
                 <h2 class="service-name">Наращивание 2100Р</h2>
                 <p class="service-duration">2 часа 30 минут</p>
+                @auth
+            <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
+        @else
+            <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
+        @endauth       
+        <a href="{{ route('main') }}" class="button">На главную </a>
+
             </div>
+            
         </section>
 
         <hr class="service-divider"> <section class="service-item">
@@ -340,6 +368,13 @@
             <div class="service-details">
                 <h2 class="service-name">Коррекция 2000Р</h2>
                 <p class="service-duration">2 часа</p>
+                @auth
+            <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
+        @else
+            <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
+        @endauth  
+        <a href="{{ route('main') }}" class="button">На главную </a>
+
             </div>
         </section>
 
@@ -348,6 +383,13 @@
             <div class="service-details">
                 <h2 class="service-name">Укрепление 1500Р</h2>
                 <p class="service-duration">1 час 30 мин</p>
+                @auth
+            <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
+        @else
+            <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
+        @endauth  
+        <a href="{{ route('main') }}" class="button">На главную </a>
+
             </div>
         </section>
     </main>

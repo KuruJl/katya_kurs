@@ -15,12 +15,8 @@ class Booking extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'start_time',
-        'end_time',
-        'user_id', // Добавляем user_id сюда
-        // 'service_id', // Если есть
-    ];
+    protected $fillable = ['start_time', 'end_time', 'user_id'];
+
 
     /**
      * Атрибуты, которые должны быть преобразованы в даты.
@@ -35,10 +31,10 @@ class Booking extends Model
     /**
      * Получить пользователя, которому принадлежит запись.
      */
-    public function user(): BelongsTo // Указываем тип возвращаемого значения
-    {
-        return $this->belongsTo(User::class); // Определяем связь "один ко многим" (обратная)
-    }
+    public function user()
+{
+    return $this->belongsTo(User::class);
+}
 
     // Можно добавить связь с услугой, если есть модель Service
     // public function service(): BelongsTo

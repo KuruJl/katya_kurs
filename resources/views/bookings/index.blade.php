@@ -4,38 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Запись на процедуру</title>
-    {{-- Рекомендуется подключить ваш основной CSS файл --}}
-    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
-
-    {{-- Встроенные стили для примера --}}
     <style>
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             padding: 20px;
             background-color: #feceda;
+            color: #a73151;
         }
         h1 {
             text-align: center;
-            color: #333;
             margin-bottom: 30px;
         }
         .booking-container {
             max-width: 100%;
-            overflow-x: auto; /* Горизонтальная прокрутка на маленьких экранах */
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #da6886;
+            border-radius: 15px;
             background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 10px rgba(167, 49, 81, 0.1);
         }
         .booking-grid {
             display: flex;
-            min-width: fit-content; /* Чтобы колонки не сжимались слишком сильно */
+            min-width: fit-content;
         }
         .day-column {
-            border-left: 1px solid #eee;
-            padding: 10px;
-            min-width: 110px; /* Минимальная ширина колонки дня */
-            flex-shrink: 0; /* Запрещаем сжатие колонок */
+            border-left: 1px solid #f8a5b7;
+            padding: 15px;
+            min-width: 120px;
+            flex-shrink: 0;
         }
         .day-column:first-child {
             border-left: none;
@@ -44,225 +40,279 @@
             text-align: center;
             font-weight: 600;
             padding-bottom: 10px;
-            margin-bottom: 10px;
-            border-bottom: 1px solid #dee2e6;
-            font-size: 0.9em;
-            color: #555;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f8a5b7;
         }
-        .day-header .day-name { /* Название дня недели */
+        .day-name {
             display: block;
-            font-size: 0.85em;
-            color: #777;
-            text-transform: capitalize; /* Делаем первую букву заглавной */
+            font-size: 0.9em;
+            color: #da6886;
+            margin-top: 5px;
         }
         .time-slot {
-            padding: 8px 5px;
-            margin-bottom: 6px;
-            border-radius: 5px;
+            padding: 10px 5px;
+            margin-bottom: 8px;
+            border-radius: 10px;
             text-align: center;
             font-size: 0.95em;
             border: 1px solid transparent;
-            transition: background-color 0.2s ease, border-color 0.2s ease;
+            transition: all 0.2s ease;
         }
-
-        /* Доступный слот (зеленый) */
         .time-slot.available {
-            background-color: #d1e7dd; /* Bootstrap success background */
-            border-color: #badbcc;
-            color: #0f5132; /* Bootstrap success text */
+            background-color: #e8f5e9;
+            border-color: #a5d6a7;
+            color: #2e7d32;
             cursor: pointer;
         }
         .time-slot.available:hover {
-            background-color: #b6dcc4;
-            border-color: #a4c9b3;
+            background-color: #c8e6c9;
+            transform: translateY(-2px);
         }
-
-        /* Недоступный или прошедший слот (красный/серый) */
         .time-slot.unavailable {
-            background-color: #f8d7da; /* Bootstrap danger background */
-            color: #58151c; /* Bootstrap danger text */
-            border-color: #f5c2c7;
+            background-color: #ffebee;
+            color: #c62828;
+            border-color: #ef9a9a;
             cursor: not-allowed;
-            opacity: 0.8;
         }
-         .time-slot.past {
-            background-color: #e9ecef; /* Серый для прошедшего времени */
-            color: #6c757d;
-            border-color: #dee2e6;
+        .time-slot.past {
+            background-color: #f5f5f5;
+            color: #9e9e9e;
+            border-color: #e0e0e0;
             cursor: not-allowed;
-            opacity: 0.7;
         }
-
-        /* Стили для формы внутри слота */
-        .time-slot form {
+        .time-slot form, .time-slot button {
             margin: 0;
-            display: block; /* Чтобы форма занимала весь слот */
-        }
-        .time-slot button {
-            background: none;
-            border: none;
             padding: 0;
-            margin: 0;
-            color: inherit; /* Наследуем цвет текста от родителя (.time-slot) */
-            font: inherit; /* Наследуем шрифт */
-            cursor: pointer;
             width: 100%;
             height: 100%;
-            text-align: center;
-            display: block;
+            background: none;
+            border: none;
+            color: inherit;
+            font: inherit;
+            cursor: inherit;
         }
-        .time-slot.unavailable button,
-        .time-slot.past button {
-            cursor: not-allowed;
-        }
-
-        /* Сообщения обратной связи */
         .alert {
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border: 1px solid transparent;
-            border-radius: .375rem; /* Tailwind's rounded-md */
+            padding: 15px;
+            margin: 0 auto 20px;
+            border-radius: 10px;
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            text-align: center;
         }
         .alert-success {
-            color: #0f5132;
-            background-color: #d1e7dd;
-            border-color: #badbcc;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
         }
         .alert-danger {
-            color: #842029;
-            background-color: #f8d7da;
-            border-color: #f5c2c7;
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef9a9a;
         }
-
-        /* Навигация (простой пример) */
         .navigation {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         .navigation a {
             display: inline-block;
-            padding: 8px 15px;
-            background-color: #0d6efd;
+            padding: 10px 20px;
+            background-color: #a73151;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
-            margin: 0 5px;
+            border-radius: 10px;
+            margin: 0 10px;
             transition: background-color 0.2s ease;
         }
         .navigation a:hover {
-            background-color: #0b5ed7;
+            background-color: #881d3a;
         }
-
+        .no-slots {
+            text-align: center;
+            color: #da6886;
+            font-style: italic;
+            padding: 10px;
+        }
+        .brand-quality,
+        .brand-elegance {
+            letter-spacing: 5px;
+            color: #a73151;
+            display: block; /* Каждая подпись на новой строке */
+            margin-top: 5px; /* Небольшой отступ между подписями */
+            font-size: 18px;
+        }
+        .logo {
+            width: 100px; /* Размер логотипа по умолчанию */
+            height: auto; /* Сохраняем пропорции */
+            border-radius: 15px;
+            object-fit: contain;
+            object-position: center;
+        }
+         @media (min-width: 768px) {
+             .logo {
+                 width: 120px; /* Увеличиваем размер на больших экранах */
+             }
+         }
+         .brand-name {
+            color: #a73151;
+            letter-spacing: 6px;
+            font-size: 28px;
+            font-weight: 600; /* Добавим немного жирности */
+            text-transform: uppercase; /* Можно сделать заглавными буквами */
+        }
+        .header-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .nav-button {
+            padding: 12px 20px;
+            background-color: #da6886;
+            color: white;
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+        
+        .nav-button:hover {
+            background-color: #c95a77;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(167, 49, 81, 0.2);
+        }
+        
+        .nav-button.profile {
+            background-color: #a73151;
+        }
+        
+        .nav-button.logout {
+            background-color: #881d3a;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-nav {
+                flex-direction: column;
+            }
+            
+            .nav-buttons {
+                width: 100%;
+            }
+            
+            .nav-button {
+                flex-grow: 1;
+            }
+        }
     </style>
 </head>
 <body>
+<div class="header-nav">
+    <div class="brand-container">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/27234bd614096077bf3ab6f70411fd2f7e8a3467?placeholderIfAbsent=true&apiKey=1f1e2d1492e74be8b445b694e3a68aae" 
+             class="logo" 
+             alt="Логотип Nails.iirk">
+        <div>
+            <div class="brand-name">nails.iirk</div>
+            <span class="brand-quality">качество</span>
+            <span class="brand-elegance">изящность</span>
+        </div>
+    </div>
+    
+    <div class="nav-buttons">
+        @auth
+            <a href="{{ route('profile.edit') }}" class="nav-button profile">Профиль</a>
+            <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
+                @csrf
+                <button type="submit" class="nav-button logout" style="cursor: pointer;">Выйти</button>
+            </form>
+        @else
+            <a href="{{ route('login') }}" class="nav-button">Вход</a>
+            <a href="{{ route('register') }}" class="nav-button">Регистрация</a>
+        @endauth
+    </div>
+</div>
 
 <h1>Запись на процедуру</h1>
 
-{{-- Отображение сообщений успеха или ошибок --}}
 @if(session('success'))
     <div class="alert alert-success">{{ session('success') }}</div>
 @endif
 @if(session('error'))
     <div class="alert alert-danger">{{ session('error') }}</div>
 @endif
-{{-- Отображение ошибок валидации --}}
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 
-{{-- Навигация по неделям (пример) --}}
 <div class="navigation">
     <a href="{{ route('bookings.index', ['start_date' => $viewStartDate->copy()->subDays(7)->format('Y-m-d')]) }}">← Пред. неделя</a>
-    <span>{{ $viewStartDate->translatedFormat('d M') }} - {{ $viewEndDate->translatedFormat('d M Y') }}</span>
+    <span>{{ $viewStartDate->translatedFormat('d F') }} - {{ $viewEndDate->translatedFormat('d F Y') }}</span>
     <a href="{{ route('bookings.index', ['start_date' => $viewStartDate->copy()->addDays(7)->format('Y-m-d')]) }}">След. неделя →</a>
 </div>
 
-{{-- Контейнер для сетки с прокруткой --}}
 <div class="booking-container">
     <div class="booking-grid">
-        {{-- Цикл по дням из контроллера --}}
-        @foreach ($timeSlotsGrid as $date => $slots)
-            @php $currentDate = \Carbon\Carbon::parse($date); @endphp
+        @foreach ($timeSlotsGrid as $date => $dayData)
             <div class="day-column">
                 <div class="day-header">
-                     {{-- Выводим дату --}}
-                    {{ $currentDate->translatedFormat('d M') }}
-                    {{-- Выводим день недели --}}
-                    <span class="day-name">{{ $currentDate->translatedFormat('D') }}</span>
+                    {{ $dayData['date'] }}
+                    <span class="day-name">{{ $dayData['day_name'] }}</span>
                 </div>
 
-                {{-- Проверяем, есть ли слоты на этот день --}}
-                @if (empty($slots))
-                    <p style="text-align: center; color: #999; font-size: 0.9em;">Нет доступного времени</p>
+                @if (empty($dayData['slots']))
+                    <p class="no-slots">Нет доступного времени</p>
                 @else
-                    {{-- Цикл по временным слотам дня --}}
-                    @foreach ($slots as $time => $slotData)
+                    @foreach ($dayData['slots'] as $time => $slotData)
                         @php
-                            // Определяем CSS класс в зависимости от статуса слота
-                            $slotClass = '';
-                            if ($slotData['is_past']) {
-                                $slotClass = 'past'; // Прошедшее время - серый
-                            } elseif ($slotData['is_available']) {
-                                $slotClass = 'available'; // Доступно - зеленый
-                            } else {
-                                $slotClass = 'unavailable'; // Занято - красный
-                            }
+                            $slotClass = $slotData['is_past'] ? 'past' : 
+                                        ($slotData['is_available'] ? 'available' : 'unavailable');
                         @endphp
 
                         <div class="time-slot {{ $slotClass }}">
-                            {{-- Если слот доступен, показываем форму для бронирования --}}
                             @if ($slotData['is_available'])
-                                <form action="{{ route('bookings.store') }}" method="POST" class="booking-form">
+                                <form action="{{ route('bookings.store') }}" method="POST">
                                     @csrf
-                                    {{-- Скрытое поле с точным временем для отправки --}}
                                     <input type="hidden" name="start_time" value="{{ $slotData['datetime_form'] }}">
-                                    {{-- Кнопка для отправки формы --}}
-                                    <button type="submit">{{ $slotData['time'] }}</button>
+                                    <button type="submit">{{ $time }}</button>
                                 </form>
                             @else
-                                {{-- Если слот недоступен или прошел, просто показываем время --}}
-                                <span>{{ $slotData['time'] }}</span>
+                                <span>{{ $time }}</span>
                             @endif
                         </div>
                     @endforeach
                 @endif
-            </div> {{-- конец .day-column --}}
+            </div>
         @endforeach
-    </div> {{-- конец .booking-grid --}}
-</div> {{-- конец .booking-container --}}
+    </div>
+</div>
 
-{{-- Небольшой скрипт для подтверждения записи --}}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const bookingForms = document.querySelectorAll('.booking-form');
-
-        bookingForms.forEach(form => {
-            form.addEventListener('submit', function(event) {
-                // Получаем время и дату из формы/кнопки для сообщения
-                const timeButton = form.querySelector('button');
-                const time = timeButton ? timeButton.textContent : 'выбранное время';
-                // Находим ближайший заголовок дня
-                const dayHeader = form.closest('.day-column').querySelector('.day-header');
-                const dateStr = dayHeader ? dayHeader.textContent.trim().split('\n')[0] : 'выбранную дату'; // Получаем дату 'd M'
-
-                // Показываем стандартное окно подтверждения браузера
-                const confirmation = confirm(`Вы уверены, что хотите записаться на ${dateStr} в ${time}?`);
-
-                // Если пользователь нажал "Отмена", предотвращаем отправку формы
-                if (!confirmation) {
-                    event.preventDefault();
+        const forms = document.querySelectorAll('form');
+        
+        forms.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                const time = form.querySelector('button').textContent;
+                const date = form.closest('.day-column').querySelector('.day-header').textContent;
+                
+                if (!confirm(`Подтвердите запись на ${date} в ${time}`)) {
+                    e.preventDefault();
                 }
-                // Если пользователь нажал "ОК", форма отправится как обычно
             });
         });
     });
@@ -270,4 +320,3 @@
 
 </body>
 </html>
-    

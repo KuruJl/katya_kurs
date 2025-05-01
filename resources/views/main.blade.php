@@ -422,9 +422,11 @@
             alt="Примеры работ мастера маникюра"
         />
 
-        <hr class="divider" aria-hidden="true" /> @auth
+        <hr class="divider" aria-hidden="true" />
+         @auth
             <a href="{{ route('profile.edit') }}" class="button">Профиль</a>
-            <form method="POST" action="{{ route('logout') }}" style="width: 100%; max-width: 600px;"> @csrf
+            <form method="POST" action="{{ route('logout') }}" style="width: 100%; max-width: 600px;">
+                @csrf
                 <button type="submit" class="button">Выйти</button> </form>
         @else
             <a href="{{ route('login') }}" class="button">Вход</a>
@@ -432,8 +434,12 @@
         @endauth
 
         <a href="https://t.me/tqwiti" class="button">Написать в Telegram</a> 
-        <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a> 
-        <a href="{{ route('bookings.usluga') }}" class="button">Посмотреть услуги</a> 
+        @auth
+            <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
+        @else
+            <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
+        @endauth       
+         <a href="{{ route('service') }}" class="button">Посмотреть услугу</a> 
         <a href="https://t.me/nailsiirk" class="button">Посмотреть работы</a> <hr class="divider" aria-hidden="true" /> 
         <div class="master-info">
             <div class="master-details">
