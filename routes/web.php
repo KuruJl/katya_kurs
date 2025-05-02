@@ -26,22 +26,12 @@ Route::middleware(['auth'])->group(function () {
     // Сюда можно добавить другие маршруты, доступные только авторизованным пользователям
 });
 
-Route::get('/make-admin', function() {
-    User::where('id', 1)->update(['is_admin' => true]);
-    return "Пользователь #1 назначен администратором! Удалите этот роут после использования!";
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', 'AdminController@dashboard');
+    // Другие защищённые маршруты
 });
 
-Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
-    // Главная админки
-    Route::get('/dashboard', function () {
-        $stats = [
-            'bookings' => Booking::count(),
-            'today_bookings' => Booking::whereDate('start_time', today())->count(),
-            'users' => User::count()
-        ];
-        return view('admin.dashboard', compact('stats'));
-    })->name('admin.dashboard');
-});
+
 // Маршруты аутентификации Laravel (если вы использовали php artisan ui:auth или Breeze/Jetstream)
 // Auth::routes(); // для ui:auth
 // Или они уже определены, если вы использовали Breeze/Jetstream
