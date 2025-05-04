@@ -5,39 +5,37 @@ use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 use app\Models\Booking;
 use app\Models\User;
-
+use App\Http\Controllers\AdminBookingController;
+use App\Http\Middleware\CheckAdmin;
 Route::get('/', function () {
-    return view('main'); // или ваш шаблон
-})->name('main');  // ⚠️ Важно: имя должно быть 'main'
+    return view('main'); 
+    })->name('main');  
 Route::get('/service', function () {
     return view('service');
-})->name('service'); // Добавляем имя маршрута
-// Группируем маршруты, требующие аутентификации
-
-Route::middleware(['auth'])->group(function () {
-            Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
-            // routes/web.php
-        Route::post('/bookings', [BookingController::class, 'store'])
-        ->name('bookings.store')
-        ->middleware('auth'); // Только для авторизованных
+    })->name('service'); 
+    Route::middleware(['auth'])->group(function () {
+    Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+    Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store')->middleware('auth'); // Только для авторизованных
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    // Сюда можно добавить другие маршруты, доступные только авторизованным пользователям
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', 'AdminController@dashboard');
-    // Другие защищённые маршруты
+Route::middleware(['is_admin'])->group(function () {
+    Route::get('/index', [AdminBookingController::class, 'index'])->name('admin.index');
+    Route::get('/create', [AdminBookingController::class, 'create'])->name('admin.create');
+    Route::post('/create', [AdminBookingController::class, 'store'])->name('admin.store');
+    Route::delete('/{booking}', [AdminBookingController::class, 'destroy'])->name('admin.destroy');
+
 });
-
-
-// Маршруты аутентификации Laravel (если вы использовали php artisan ui:auth или Breeze/Jetstream)
-// Auth::routes(); // для ui:auth
-// Или они уже определены, если вы использовали Breeze/Jetstream
-
-// Главная страница и другие общедоступные маршруты
-
+/*
+Route::middleware(['auth', 'checkAdmin'])->prefix('admin/bookings')->name('admin.bookings.')->group(function () {
+    Route::get('/', [AdminBookingController::class, 'index'])->name('index');
+    Route::get('/create', [AdminBookingController::class, 'create'])->name('create');
+    Route::post('/', [AdminBookingController::class, 'store'])->name('store');
+    Route::delete('/{booking}', [AdminBookingController::class, 'destroy'])->name('destroy');
+});
+*/
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

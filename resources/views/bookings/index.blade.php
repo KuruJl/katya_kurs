@@ -300,11 +300,7 @@
         @endforeach
     </div>
 </div>
-@auth
-    @if(auth()->user()->is_admin)
-        <a href="/admin/dashboard" class="admin-link">Админ-панель</a>
-    @endif
-@endauth
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const forms = document.querySelectorAll('form');
