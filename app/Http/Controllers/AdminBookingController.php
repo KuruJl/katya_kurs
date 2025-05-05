@@ -37,7 +37,6 @@ class AdminBookingController extends Controller
      */
     public function store(Request $request)
 {
-    
     try {
         $startTime = Carbon::parse($request->input('start_time'));
     } catch (\Exception $e) {
@@ -48,13 +47,11 @@ class AdminBookingController extends Controller
 
     $request->validate([
         'start_time' => 'required|date', // Изменено на просто 'date'
+        'user_id' => 'required|integer|exists:users,id', // Убедитесь, что это правило есть
         // ... другие правила ...
     ]);
 
-    Booking::create([
-        'start_time' => $formattedStartTime,
-        // ... другие поля ...
-    ]);
+    Booking::create(array_merge($request->all(), ['user_id' => Auth::id()]));
 
     return redirect()->route('admin.index')->with('success', 'Бронирование успешно добавлено!');
 }

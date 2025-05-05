@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo; // Импортировать BelongsTo
+use Illuminate\Database\Eloquent\Builder;
+use Carbon\Carbon;
 
 class Booking extends Model
 {
@@ -35,7 +37,10 @@ class Booking extends Model
 {
     return $this->belongsTo(User::class);
 }
-
+public function scopeIsActive(Builder $query): Builder
+    {
+        return $query->where('start_time', '>=', Carbon::now());
+    }
     // Можно добавить связь с услугой, если есть модель Service
     // public function service(): BelongsTo
     // {

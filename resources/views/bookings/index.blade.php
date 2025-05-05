@@ -158,6 +158,7 @@
             font-weight: 600; /* Добавим немного жирности */
             text-transform: uppercase; /* Можно сделать заглавными буквами */
         }
+        
         .header-nav {
             display: flex;
             justify-content: space-between;
@@ -171,6 +172,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            text-decoration: none;
         }
         
         .nav-buttons {
@@ -224,9 +226,9 @@
     </style>
 </head>
 <body>
-<div class="header-nav">
-    <div class="brand-container">
-        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/27234bd614096077bf3ab6f70411fd2f7e8a3467?placeholderIfAbsent=true&apiKey=1f1e2d1492e74be8b445b694e3a68aae" 
+<div class="header-nav" >
+    <a href="{{ route('main') }}" class="brand-container">
+        <img  src="https://cdn.builder.io/api/v1/image/assets/TEMP/27234bd614096077bf3ab6f70411fd2f7e8a3467?placeholderIfAbsent=true&apiKey=1f1e2d1492e74be8b445b694e3a68aae" 
              class="logo" 
              alt="Логотип Nails.iirk">
         <div>
@@ -234,7 +236,7 @@
             <span class="brand-quality">качество</span>
             <span class="brand-elegance">изящность</span>
         </div>
-    </div>
+    </a>
     
     <div class="nav-buttons">
         @auth

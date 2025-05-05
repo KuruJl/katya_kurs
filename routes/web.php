@@ -7,9 +7,14 @@ use app\Models\Booking;
 use app\Models\User;
 use App\Http\Controllers\AdminBookingController;
 use App\Http\Middleware\CheckAdmin;
+
+
 Route::get('/', function () {
     return view('main'); 
     })->name('main');  
+
+
+
 Route::get('/service', function () {
     return view('service');
     })->name('service'); 
@@ -28,14 +33,7 @@ Route::middleware(['is_admin'])->group(function () {
     Route::delete('/{booking}', [AdminBookingController::class, 'destroy'])->name('admin.destroy');
 
 });
-/*
-Route::middleware(['auth', 'checkAdmin'])->prefix('admin/bookings')->name('admin.bookings.')->group(function () {
-    Route::get('/', [AdminBookingController::class, 'index'])->name('index');
-    Route::get('/create', [AdminBookingController::class, 'create'])->name('create');
-    Route::post('/', [AdminBookingController::class, 'store'])->name('store');
-    Route::delete('/{booking}', [AdminBookingController::class, 'destroy'])->name('destroy');
-});
-*/
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -8,18 +8,31 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Booking;
+use Carbon\Carbon;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
+
     public function edit(Request $request): View
-    {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
+{
+    $user = Auth::user();
+    $activeBookings = Booking::where('user_id', $user->id)
+                            ->isActive()
+                            ->orderBy('start_time')
+                            ->get();
+
+    $pastBookings = Booking::where('user_id', $user->id)
+                            ->where('start_time', '<', Carbon::now())
+                            ->orderByDesc('start_time')
+                            ->get();
+
+    return view('profile.edit', [
+        'user' => $request->user(),
+        'activeBookings' => $activeBookings,
+        'pastBookings' => $pastBookings,
+    ]);
+}
 
     /**
      * Update the user's profile information.
