@@ -4,16 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Запись на процедуру</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             padding: 20px;
             background-color: #feceda;
             color: #a73151;
+            line-height: 1.6;
         }
         h1 {
             text-align: center;
             margin-bottom: 30px;
+            font-weight: 600;
+            color: #881d3a;
         }
         .booking-container {
             max-width: 100%;
@@ -42,12 +48,14 @@
             padding-bottom: 10px;
             margin-bottom: 15px;
             border-bottom: 1px solid #f8a5b7;
+            color: #da6886;
         }
         .day-name {
             display: block;
             font-size: 0.9em;
             color: #da6886;
             margin-top: 5px;
+            font-weight: 500;
         }
         .time-slot {
             padding: 10px 5px;
@@ -57,6 +65,7 @@
             font-size: 0.95em;
             border: 1px solid transparent;
             transition: all 0.2s ease;
+            font-weight: 500;
         }
         .time-slot.available {
             background-color: #e8f5e9;
@@ -121,6 +130,7 @@
             border-radius: 10px;
             margin: 0 10px;
             transition: background-color 0.2s ease;
+            font-weight: 500;
         }
         .navigation a:hover {
             background-color: #881d3a;
@@ -131,34 +141,6 @@
             font-style: italic;
             padding: 10px;
         }
-        .brand-quality,
-        .brand-elegance {
-            letter-spacing: 5px;
-            color: #a73151;
-            display: block; /* Каждая подпись на новой строке */
-            margin-top: 5px; /* Небольшой отступ между подписями */
-            font-size: 18px;
-        }
-        .logo {
-            width: 100px; /* Размер логотипа по умолчанию */
-            height: auto; /* Сохраняем пропорции */
-            border-radius: 15px;
-            object-fit: contain;
-            object-position: center;
-        }
-         @media (min-width: 768px) {
-             .logo {
-                 width: 120px; /* Увеличиваем размер на больших экранах */
-             }
-         }
-         .brand-name {
-            color: #a73151;
-            letter-spacing: 6px;
-            font-size: 28px;
-            font-weight: 600; /* Добавим немного жирности */
-            text-transform: uppercase; /* Можно сделать заглавными буквами */
-        }
-        
         .header-nav {
             display: flex;
             justify-content: space-between;
@@ -167,21 +149,50 @@
             flex-wrap: wrap;
             gap: 15px;
         }
-        
+
         .brand-container {
             display: flex;
             align-items: center;
             gap: 15px;
             text-decoration: none;
         }
-        
+
+        .logo {
+            width: 100px;
+            height: auto;
+            border-radius: 15px;
+            object-fit: contain;
+            object-position: center;
+        }
+        @media (min-width: 768px) {
+            .logo {
+                width: 120px;
+            }
+        }
+        .brand-name {
+            color: #a73151;
+            letter-spacing: 6px;
+            font-size: 28px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .brand-quality,
+        .brand-elegance {
+            letter-spacing: 5px;
+            color: #a73151;
+            display: block;
+            margin-top: 5px;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
         .nav-buttons {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
             justify-content: center;
         }
-        
+
         .nav-button {
             padding: 12px 20px;
             background-color: #da6886;
@@ -194,31 +205,31 @@
             text-align: center;
             border: 2px solid transparent;
         }
-        
+
         .nav-button:hover {
             background-color: #c95a77;
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(167, 49, 81, 0.2);
         }
-        
+
         .nav-button.profile {
             background-color: #a73151;
         }
-        
+
         .nav-button.logout {
             background-color: #881d3a;
         }
-        
+
         /* Адаптивность */
         @media (max-width: 768px) {
             .header-nav {
                 flex-direction: column;
             }
-            
+
             .nav-buttons {
                 width: 100%;
             }
-            
+
             .nav-button {
                 flex-grow: 1;
             }
@@ -228,17 +239,18 @@
 <body>
 <div class="header-nav" >
     <a href="{{ route('main') }}" class="brand-container">
-        <img  src="https://cdn.builder.io/api/v1/image/assets/TEMP/27234bd614096077bf3ab6f70411fd2f7e8a3467?placeholderIfAbsent=true&apiKey=1f1e2d1492e74be8b445b694e3a68aae" 
-             class="logo" 
-             alt="Логотип Nails.iirk">
+        <img     src="https://cdn.builder.io/api/v1/image/assets/TEMP/27234bd614096077bf3ab6f70411fd2f7e8a3467?placeholderIfAbsent=true&apiKey=1f1e2d1492e74be8b445b694e3a68aae"
+                class="logo"
+                alt="Логотип Nails.iirk">
         <div>
             <div class="brand-name">nails.iirk</div>
             <span class="brand-quality">качество</span>
             <span class="brand-elegance">изящность</span>
         </div>
     </a>
-    
+
     <div class="nav-buttons">
+        
         @auth
             <a href="{{ route('profile.edit') }}" class="nav-button profile">Профиль</a>
             <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
@@ -281,8 +293,8 @@
                 @else
                     @foreach ($dayData['slots'] as $time => $slotData)
                         @php
-                            $slotClass = $slotData['is_past'] ? 'past' : 
-                                        ($slotData['is_available'] ? 'available' : 'unavailable');
+                            $slotClass = $slotData['is_past'] ? 'past' :
+                                         ($slotData['is_available'] ? 'available' : 'unavailable');
                         @endphp
 
                         <div class="time-slot {{ $slotClass }}">
@@ -306,12 +318,12 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const forms = document.querySelectorAll('form');
-        
+
         forms.forEach(form => {
             form.addEventListener('submit', function(e) {
                 const time = form.querySelector('button').textContent;
                 const date = form.closest('.day-column').querySelector('.day-header').textContent;
-                
+
                 if (!confirm(`Подтвердите запись на ${date} в ${time}`)) {
                     e.preventDefault();
                 }

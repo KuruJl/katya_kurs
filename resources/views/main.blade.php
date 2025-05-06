@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html lang="ru"> <head>
+<html lang="ru">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nails.iirk - Мастер маникюра Иркутск</title> <style>
+    <title>Nails.iirk - Мастер маникюра Иркутск</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
         /* Общие сбросы и базовые стили */
         html, body {
             margin: 0;
@@ -10,7 +15,7 @@
             box-sizing: border-box; /* Применяем ко всему */
             width: 100%;
             overflow-x: hidden; /* Предотвращаем горизонтальный скролл */
-            font-family: 'Inter', sans-serif; /* Используем шрифт Inter */
+            font-family: 'Montserrat', sans-serif; /* Используем шрифт Montserrat */
             line-height: 1.5; /* Улучшенный интервал между строками по умолчанию */
             color: #a73151; /* Основной цвет текста */
             background-color: #feceda; /* Основной цвет фона */
@@ -60,11 +65,11 @@
             object-fit: contain;
             object-position: center;
         }
-         @media (min-width: 768px) {
-             .logo {
-                 width: 120px; /* Увеличиваем размер на больших экранах */
-             }
-         }
+        @media (min-width: 768px) {
+            .logo {
+                width: 120px; /* Увеличиваем размер на больших экранах */
+            }
+        }
 
 
         /* Стилизация названия бренда и подписей */
@@ -86,8 +91,7 @@
         }
 
         /* Стилизация основного изображения */
-        .main-image,
-        .map-image { /* Применяем общие стили к обоим изображениям */
+        .main-image {
             width: 100%; /* Изображение занимает всю доступную ширину контейнера */
             max-width: 800px; /* Но не превышает максимальную ширину */
             height: auto; /* Автоматическая высота для сохранения пропорций */
@@ -106,11 +110,11 @@
             border: none;
             margin: 0 auto; /* Центрируем горизонтально */
         }
-         @media (min-width: 768px) {
-             .divider {
-                 height: 2px; /* Немного толще на больших экранах */
-             }
-         }
+        @media (min-width: 768px) {
+            .divider {
+                height: 2px; /* Немного толще на больших экранах */
+            }
+        }
 
 
         /* Базовые стили для кнопок и ссылок, стилизованных как кнопки */
@@ -136,34 +140,34 @@
 
         /* Стили для кнопки внутри формы (например, Выйти) */
         form .button {
-             /* Убираем стандартные стили браузера для кнопки внутри формы */
-             -webkit-appearance: none;
-             -moz-appearance: none;
-             appearance: none;
-             /* Сбрасываем отступы и границы, которые могут добавиться по умолчанию */
-             margin: 0;
-             padding: 0;
-             border: none;
-             background: none;
-             /* Применяем стили кнопки */
-             display: block; /* Или inline-block, если нужно, чтобы ширина была по содержимому */
-             width: 100%; /* Занимает всю ширину формы */
-             font-family: inherit;
-             font-size: inherit;
-             letter-spacing: inherit;
-             color: inherit;
-             text-transform: inherit;
-             text-align: center;
-             cursor: pointer;
-             /* Применяем общие стили из класса .button */
-             background-color: #da6886;
-             color: #fff;
-             border-radius: 15px;
-             padding: 15px 20px;
-             transition: background-color 0.3s ease;
-             box-sizing: border-box;
-             max-width: 600px; /* Ограничение ширины */
-         }
+            /* Убираем стандартные стили браузера для кнопки внутри формы */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            /* Сбрасываем отступы и границы, которые могут добавиться по умолчанию */
+            margin: 0;
+            padding: 0;
+            border: none;
+            background: none;
+            /* Применяем стили кнопки */
+            display: block; /* Или inline-block, если нужно, чтобы ширина была по содержимому */
+            width: 100%; /* Занимает всю ширину формы */
+            font-family: inherit;
+            font-size: inherit;
+            letter-spacing: inherit;
+            color: inherit;
+            text-transform: inherit;
+            text-align: center;
+            cursor: pointer;
+            /* Применяем общие стили из класса .button */
+            background-color: #da6886;
+            color: #fff;
+            border-radius: 15px;
+            padding: 15px 20px;
+            transition: background-color 0.3s ease;
+            box-sizing: border-box;
+            max-width: 600px; /* Ограничение ширины */
+        }
 
 
         .button:hover {
@@ -174,15 +178,15 @@
         @media (min-width: 768px) {
             .button,
             form .button { /* Применяем ко всем кнопкам/ссылкам-кнопкам */
-                 max-width: 800px; /* Увеличиваем максимальную ширину */
-                 padding: 20px 40px;
-                 font-size: 24px;
-                 letter-spacing: 8px;
-             }
-             /* Если нужна разная высота для кнопок, можно добавить модификаторы */
-             .address-button {
-                  padding: 15px 40px; /* Меньшая высота для кнопки адреса */
-             }
+                max-width: 800px; /* Увеличиваем максимальную ширину */
+                padding: 20px 40px;
+                font-size: 24px;
+                letter-spacing: 8px;
+            }
+            /* Если нужна разная высота для кнопок, можно добавить модификаторы */
+            .address-button {
+                padding: 15px 40px; /* Меньшая высота для кнопки адреса */
+            }
         }
 
 
@@ -199,12 +203,12 @@
             width: 100%; /* Занимает всю доступную ширину */
             max-width: 600px; /* Ограничение максимальной ширины */
         }
-         @media (min-width: 768px) {
-             .master-info {
-                 max-width: 800px; /* Увеличиваем максимальную ширину */
-                 padding: 34px 50px;
-             }
-         }
+        @media (min-width: 768px) {
+            .master-info {
+                max-width: 800px; /* Увеличиваем максимальную ширину */
+                padding: 34px 50px;
+            }
+        }
 
         .master-details {
             text-align: center;
@@ -232,12 +236,12 @@
 
         /* Стилизация футера */
         .footer-divider { /* Стили такие же, как у обычного разделителя */
-             width: 100%;
-             max-width: 800px;
-             height: 1px;
-             background-color: #a73151;
-             border: none;
-             margin: 0 auto;
+            width: 100%;
+            max-width: 800px;
+            height: 1px;
+            background-color: #a73151;
+            border: none;
+            margin: 0 auto;
         }
         @media (min-width: 768px) {
             .footer-divider {
@@ -246,13 +250,20 @@
             }
         }
 
+        .footer-wrapper {
+            display: flex;
+            justify-content: center; /* Центрируем содержимое по горизонтали */
+            width: 100%;
+            max-width: 960px; /* Ограничиваем шириной content-wrapper */
+            padding: 20px; /* Добавим немного отступов внутри */
+            box-sizing: border-box; /* Учитываем padding в ширине */
+        }
 
         .footer-content {
             display: flex;
             flex-direction: column; /* По умолчанию элементы в столбец */
             align-items: center; /* Центрируем по горизонтали в столбике */
             width: 100%;
-            max-width: 800px; /* Ограничение ширины футера */
             gap: 20px; /* Отступ между элементами футера */
             font-size: 16px;
             color: #a73151;
@@ -265,7 +276,6 @@
                 flex-direction: row; /* На больших экранах - в строку */
                 justify-content: space-between; /* Распределяем элементы по ширине */
                 align-items: center; /* Выравниваем по центру по вертикали */
-                max-width: 1000px; /* Увеличиваем максимальную ширину */
                 font-size: 20px;
                 letter-spacing: 3px;
                 gap: 30px; /* Увеличиваем гэп между элементами в строке */
@@ -276,26 +286,26 @@
             width: 80px; /* Меньше лого в футере */
             border-radius: 10px; /* Немного меньше радиус */
         }
-         @media (min-width: 768px) {
-             .footer-content .logo {
-                 width: 100px; /* Увеличиваем на больших экранах */
-                 border-radius: 15px;
-             }
-         }
+        @media (min-width: 768px) {
+            .footer-content .logo {
+                width: 100px; /* Увеличиваем на больших экранах */
+                border-radius: 15px;
+            }
+        }
 
         .contact-info {
             display: flex;
             flex-direction: column;
             align-items: center; /* Центрируем в столбике */
         }
-         @media (min-width: 768px) {
-             .contact-info {
-                 align-items: flex-end; /* Выравниваем по правому краю в строке */
-             }
-         }
+        @media (min-width: 768px) {
+            .contact-info {
+                align-items: flex-end; /* Выравниваем по правому краю в строке */
+            }
+        }
 
         .phone-number {
-             margin-bottom: 10px; /* Отступ после номера телефона */
+            margin-bottom: 10px; /* Отступ после номера телефона */
         }
 
         .social-links {
@@ -304,11 +314,11 @@
             align-items: center; /* Центрируем в столбике */
             gap: 8px; /* Отступ между ссылками */
         }
-         @media (min-width: 768px) {
-             .social-links {
-                 align-items: flex-end; /* Выравниваем по правому краю в строке */
-             }
-         }
+        @media (min-width: 768px) {
+            .social-links {
+                align-items: flex-end; /* Выравниваем по правому краю в строке */
+            }
+        }
 
         .social-links a {
             color: #a73151;
@@ -334,22 +344,9 @@
 
         /* Дополнительные стили для улучшения внешнего вида */
         h1, h2, h3, h4, h5, h6 {
-             margin-top: 0;
-             margin-bottom: 0;
+            margin-top: 0;
+            margin-bottom: 0;
         }
-/* Стилизация основного изображения */
-       /* .main-image, */ /* Убираем .map-image отсюда */
-       .main-image { /* Применяем общие стили только к основному изображению */
-           width: 100%; /* Изображение занимает всю доступную ширину контейнера */
-           max-width: 800px; /* Но не превышает максимальную ширину */
-           height: auto; /* Автоматическая высота для сохранения пропорций */
-           border-radius: 15px;
-           object-fit: cover; /* Обрезка для сохранения пропорций, если необходимо */
-           object-position: center;
-           aspect-ratio: 2 / 1; /* Задаем соотношение сторон */
-       }
-
-
         /* Стилизация контейнера для встраиваемой карты Яндекса */
         .map-embed-container {
             width: 100%; /* Занимает всю доступную ширину родителя */
@@ -357,7 +354,6 @@
             margin: 0 auto; /* Центрируем блок горизонтально */
             border-radius: 15px; /* Применяем скругление углов к контейнеру */
             overflow: hidden; /* Обрезаем содержимое по границам контейнера */
-            /* position: relative; /* Уже есть во внутреннем div Яндекса, но можно и здесь */
         }
 
         /* Стилизация самого iframe карты */
@@ -366,7 +362,6 @@
             width: 100%; /* iframe занимает 100% ширины своего родителя (.map-embed-container) */
             height: 400px; /* Задаем фиксированную высоту. Можно сделать ее отзывчивой, если нужно */
             border: none; /* Убираем рамку iframe */
-            /* Удалены inline стили width, height, frameborder */
         }
 
         /* Можно добавить медиа-запрос для изменения высоты карты на разных экранах, если 400px недостаточно или слишком много */
@@ -377,10 +372,9 @@
         }
 
         /* Убедимся, что ссылки Яндекса остаются поверх карты */
-         .map-embed-container a[style*="position:absolute"] {
-             z-index: 10; /* Устанавливаем z-index выше, чем у iframe */
-         }
-
+        .map-embed-container a[style*="position:absolute"] {
+            z-index: 10; /* Устанавливаем z-index выше, чем у iframe */
+        }
 
         /* Стилизация разделительной линии */
         .divider {
@@ -391,11 +385,11 @@
             border: none;
             margin: 0 auto; /* Центрируем горизонтально */
         }
-         @media (min-width: 768px) {
-             .divider {
-                 height: 2px; /* Немного толще на больших экранах */
-             }
-         }
+        @media (min-width: 768px) {
+            .divider {
+                height: 2px; /* Немного толще на больших экранах */
+            }
+        }
 
     </style>
 </head>
@@ -423,24 +417,26 @@
         />
 
         <hr class="divider" aria-hidden="true" />
-         @auth
+        @auth
             <a href="{{ route('profile.edit') }}" class="button">Профиль</a>
             <form method="POST" action="{{ route('logout') }}" style="width: 100%; max-width: 600px;">
                 @csrf
-                <button type="submit" class="button">Выйти</button> </form>
+                <button type="submit" class="button">Выйти</button>
+            </form>
         @else
             <a href="{{ route('login') }}" class="button">Вход</a>
             <a href="{{ route('register') }}" class="button">Регистрация</a>
         @endauth
 
-        <a href="https://t.me/tqwiti" class="button">Написать в Telegram</a> 
+        <a href="https://t.me/tqwiti" class="button">Написать в Telegram</a>
         @auth
             <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
         @else
             <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
-        @endauth       
-         <a href="{{ route('service') }}" class="button">Посмотреть услугу</a> 
-        <a href="https://t.me/nailsiirk" class="button">Посмотреть работы</a> <hr class="divider" aria-hidden="true" /> 
+        @endauth
+        <a href="{{ route('service') }}" class="button">Посмотреть услугу</a>
+        <a href="https://t.me/nailsiirk" class="button">Посмотреть работы</a>
+        <hr class="divider" aria-hidden="true" />
         <div class="master-info">
             <div class="master-details">
                 <div class="master-name">Мастер Катерина</div>
@@ -452,31 +448,34 @@
             </div>
         </div>
 
-        <button class="button address-button">Наш адрес</button> <div class="map-embed-container">
+        <button class="button address-button">Наш адрес</button>
+        <div class="map-embed-container">
             <div style="position:relative;overflow:hidden;">
                 <a href="https://yandex.ru/maps/63/irkutsk/?utm_medium=mapframe&utm_source=maps" style="color:#eee;font-size:12px;position:absolute;top:0px;">Иркутск</a>
                 <a href="https://yandex.ru/maps/63/irkutsk/house/ulitsa_rozy_lyuksemburg_227/ZUkCaAZmQEEDVUJvYWJydHxqYw8=/?ll=104.171231%2C52.350338&utm_medium=mapframe&utm_source=maps&z=17.28" style="color:#eee;font-size:12px;position:absolute;top:14px;">Улица Розы Люксембург, 227 — Яндекс Карты</a>
 
                 <iframe src="https://yandex.ru/map-widget/v1/?ll=104.171231%2C52.350338&mode=whatshere&whatshere%5Bpoint%5D=104.169346%2C52.350928&whatshere%5Bzoom%5D=17&z=17.28" frameborder="0" allowfullscreen="true" style="position:relative;"></iframe>
-                 </div>
-        </div>
-        <hr class="footer-divider" aria-hidden="true" />
-
-        <hr class="footer-divider" aria-hidden="true" /> <footer class="footer-content">
-            <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/27234bd614096077bf3ab6f70411fd2f7e8a3467?placeholderIfAbsent=true&apiKey=1f1e2d1492e74be8b445b694e3a68aae"
-                class="logo"
-                alt="Логотип Nails.iirk в подвале"
-            />
-            <div class="contact-info">
-                <div class="phone-number">Связаться с нами: 89025497599</div>
-                <div class="social-links">
-                    <a href="#" class="vk-link">Наш VK</a>
-                    <a href="#" class="inst-link">Наш Instagram</a>
-                </div>
             </div>
-        </footer>
+        </div>
+
+        <hr class="divider" aria-hidden="true" />
+        <div class="footer-wrapper">
+            <footer class="footer-content">
+                <img
+                    loading="lazy"
+                    src="https://cdn.builder.io/api/v1/image/assets/TEMP/27234bd614096077bf3ab6f70411fd2f7e8a3467?placeholderIfAbsent=true&apiKey=1f1e2d1492e74be8b445b694e3a68aae"
+                    class="logo"
+                    alt="Логотип Nails.iirk в подвале"
+                />
+                <div class="contact-info">
+                    <div class="phone-number">Связаться с нами: 89025497599</div>
+                    <div class="social-links">
+                        <a href="https://vk.com/nails.iirk" class="vk-link">Наш VK</a>
+                        <a href="https://www.instagram.com/nails.iirk?igsh=ZWYxbHNnYmZsbWp1&utm_source=qr" class="inst-link">Наш Instagram</a>
+                    </div>
+                </div>
+            </footer>
+        </div>
 
     </div>
 </div>

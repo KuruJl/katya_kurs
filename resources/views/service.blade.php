@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="ru"> <head>
+<html lang="ru">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nails.iirk - Услуги</title> <link rel="stylesheet" href="https://fonts.fontstorage.com/import/kyivtypeserif.css">
+    <title>Nails.iirk - Услуги</title>
+    <link rel="stylesheet" href="https://fonts.fontstorage.com/import/kyivtypeserif.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
 
     <style>
         /* Сброс стилей и базовые настройки */
@@ -14,7 +16,7 @@
             padding: 0;
             box-sizing: border-box;
             width: 100%;
-            font-family: 'Inter', sans-serif; /* Задаем Inter как базовый шрифт */
+            font-family: 'Montserrat', sans-serif; /* Задаем Montserrat как базовый шрифт */
             background-color: #feceda; /* Фон для всей страницы */
             color: #333; /* Базовый цвет текста, если не переопределен */
         }
@@ -67,10 +69,10 @@
             flex-shrink: 0; /* Чтобы лого не сжималось */
         }
         @media (max-width: 640px) {
-             .logo {
-                 width: 120px;
-                 height: 120px;
-             }
+            .logo {
+                width: 120px;
+                height: 120px;
+            }
         }
 
         .salon-info {
@@ -81,9 +83,9 @@
         }
         @media (min-width: 769px) { /* На больших экранах выравнивание по левому краю */
             .salon-info {
-                 align-items: flex-start;
-                 text-align: left;
-             }
+                align-items: flex-start;
+                text-align: left;
+            }
         }
 
 
@@ -92,8 +94,8 @@
             letter-spacing: 8px; /* Уменьшил */
             margin-bottom: 10px;
             font-size: 56px; /* Немного уменьшил */
-            font-weight: 600; /* Используем Inter Bold */
-            font-family: 'Inter', sans-serif; /* Явно указываем Inter */
+            font-weight: 700; /* Используем Montserrat Bold */
+            font-family: 'Montserrat', sans-serif; /* Явно указываем Montserrat */
         }
         @media (max-width: 991px) {
             .salon-name {
@@ -111,7 +113,7 @@
             color: #a73151;
             letter-spacing: 4px; /* Уменьшил */
             font-size: 28px; /* Уменьшил */
-             font-family: 'Inter', sans-serif; /* Явно указываем Inter */
+            font-family: 'Montserrat', sans-serif; /* Явно указываем Montserrat */
         }
         @media (max-width: 991px) {
             .salon-address {
@@ -135,7 +137,7 @@
             display: flex;
             align-items: center;
             gap: 60px; /* Уменьшил */
-             /* font-family: 'Kyiv Type Serif'; Убрано отсюда, применяем ниже */
+            /* font-family: 'Kyiv Type Serif'; Убрано отсюда, применяем ниже */
         }
         @media (max-width: 991px) {
             .service-item {
@@ -147,15 +149,15 @@
         }
 
         .service-image {
-             /* width: 629px; Убрано, используем flex/max-width */
-             /* height: 566px; Убрано */
-             max-width: 50%; /* Занимает половину ширины */
-             width: 100%; /* Для корректной работы max-width */
-             height: auto; /* Автоматическая высота */
-             aspect-ratio: 629 / 566; /* Сохраняем пропорции */
-             border-radius: 20px;
-             object-fit: cover;
-             flex-shrink: 0; /* Чтобы картинка не сжималась сильнее текста */
+            /* width: 629px; Убрано, используем flex/max-width */
+            /* height: 566px; Убрано */
+            max-width: 50%; /* Занимает половину ширины */
+            width: 100%; /* Для корректной работы max-width */
+            height: auto; /* Автоматическая высота */
+            aspect-ratio: 629 / 566; /* Сохраняем пропорции */
+            border-radius: 20px;
+            object-fit: cover;
+            flex-shrink: 0; /* Чтобы картинка не сжималась сильнее текста */
         }
         @media (max-width: 991px) {
             .service-image {
@@ -172,11 +174,11 @@
             font-family: 'Kyiv Type Serif', serif; /* <--- ПРИМЕНЯЕМ ШРИФТ ЗДЕСЬ */
             flex-grow: 1; /* Позволяет блоку занять оставшееся место */
         }
-         @media (min-width: 992px) { /* На больших экранах выравнивание по левому краю */
-             .service-details {
-                 align-items: flex-start;
-             }
-         }
+        @media (min-width: 992px) { /* На больших экранах выравнивание по левому краю */
+            .service-details {
+                align-items: flex-start;
+            }
+        }
         @media (max-width: 991px) {
             .service-details {
                 width: 100%; /* Занимает всю ширину под картинкой */
@@ -205,6 +207,7 @@
             font-size: 32px; /* Уменьшил */
             /* font-family: 'Kyiv Type Serif'; Наследуется от .service-details */
             font-weight: normal;
+            font-family: 'Montserrat', sans-serif; /* Вернул Montserrat для длительности */
         }
         @media (max-width: 991px) {
             .service-duration {
@@ -264,7 +267,7 @@
             letter-spacing: 3px; /* Уменьшил */
             margin-bottom: 20px; /* Уменьшил */
             font-size: 22px; /* Уменьшил */
-             font-family: 'Inter', sans-serif; /* Явно указываем Inter */
+            font-family: 'Montserrat', sans-serif; /* Явно указываем Montserrat */
         }
         @media (max-width: 640px) {
             .contact-phone {
@@ -288,7 +291,7 @@
             color: #a73151;
             letter-spacing: 3px; /* Уменьшил */
             font-size: 20px; /* Уменьшил */
-            font-family: 'Inter', sans-serif; /* Явно указываем Inter */
+            font-family: 'Montserrat', sans-serif; /* Явно указываем Montserrat */
             text-decoration: none; /* Убираем подчеркивание */
             transition: color 0.3s ease; /* Плавный ховер */
         }
@@ -324,7 +327,7 @@
             text-decoration: none; /* Убираем подчеркивание у ссылок */
             border: none;
             cursor: pointer;
-            font-family: inherit;
+            font-family: 'Montserrat', sans-serif; /* Применяем Montserrat к кнопкам */
             font-size: 20px;
             letter-spacing: 5px;
             text-transform: uppercase; /* Можно сделать заглавными буквами */
@@ -353,54 +356,54 @@
                 <h2 class="service-name">Наращивание 2100Р</h2>
                 <p class="service-duration">2 часа 30 минут</p>
                 @auth
-            <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
-        @else
-            <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
-        @endauth       
-        <a href="{{ route('main') }}" class="button">На главную </a>
-
+                    <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
+                @else
+                    <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
+                @endauth
+                <a href="{{ route('main') }}" class="button">На главную </a>
             </div>
-            
         </section>
 
-        <hr class="service-divider"> <section class="service-item">
+        <hr class="service-divider">
+        <section class="service-item">
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/ed88e645342152f08776ddc6f716b94523dfd7e1" alt="Коррекция ногтей" class="service-image">
             <div class="service-details">
                 <h2 class="service-name">Коррекция 2000Р</h2>
                 <p class="service-duration">2 часа</p>
                 @auth
-            <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
-        @else
-            <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
-        @endauth  
-        <a href="{{ route('main') }}" class="button">На главную </a>
-
+                    <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
+                @else
+                    <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
+                @endauth
+                <a href="{{ route('main') }}" class="button">На главную </a>
             </div>
         </section>
 
-        <hr class="service-divider"> <section class="service-item">
+        <hr class="service-divider">
+        <section class="service-item">
             <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/e79ff66fb3aceebf7824d03cb406f7df170906af" alt="Укрепление ногтей" class="service-image">
             <div class="service-details">
                 <h2 class="service-name">Укрепление 1500Р</h2>
                 <p class="service-duration">1 час 30 мин</p>
                 @auth
-            <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
-        @else
-            <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
-        @endauth  
-        <a href="{{ route('main') }}" class="button">На главную </a>
-
+                    <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
+                @else
+                    <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
+                @endauth
+                <a href="{{ route('main') }}" class="button">На главную </a>
             </div>
         </section>
     </main>
 
-    <hr class="service-divider"> <footer class="footer">
+    <hr class="service-divider">
+    <footer class="footer">
         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2166173af264b6b233ee79ec2f0ed8858f630d0c" alt="Логотип Nails.iirk" class="logo">
         <div class="contact-info">
             <p class="contact-phone">Связаться с нами: 89025497599</p>
             <nav class="social-links">
                 <a href="#" class="social-link">Наш VK</a>
-                <a href="#" class="social-link">Наш Instagram</a> </nav>
+                <a href="#" class="social-link">Наш Instagram</a>
+            </nav>
         </div>
     </footer>
 </div>
