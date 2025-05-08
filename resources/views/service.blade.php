@@ -16,9 +16,9 @@
             padding: 0;
             box-sizing: border-box;
             width: 100%;
-            font-family: 'Montserrat', sans-serif; /* Задаем Montserrat как базовый шрифт */
-            background-color: #feceda; /* Фон для всей страницы */
-            color: #333; /* Базовый цвет текста, если не переопределен */
+            font-family: 'Montserrat', sans-serif;
+            background-color: #feceda;
+            color: #333;
         }
 
         *, *:before, *:after {
@@ -26,285 +26,370 @@
         }
 
         .salon-container {
-            max-width: 1320px; /* Уменьшил max-width для лучшего вида на не самых широких экранах */
-            margin: 0 auto;
-            padding: 50px 40px; /* Уменьшил паддинги */
-            /* background-color: #feceda; Убрано, так как задано для body */
+            max-width: 1200px;
+            margin: 0 auto; /* Центрирование основного контейнера */
+            padding: 40px 30px;
         }
+
         @media (max-width: 991px) {
             .salon-container {
-                /* max-width: 991px; Убрано, не нужно */
-                padding: 40px 20px;
+                padding: 30px 20px;
             }
         }
+
         @media (max-width: 640px) {
             .salon-container {
-                /* max-width: 640px; Убрано, не нужно */
-                padding: 30px 15px;
+                padding: 20px 10px;
             }
         }
 
-        .header {
-            display: flex;
-            align-items: center;
-            gap: 25px; /* Немного увеличил */
-            margin-bottom: 60px; /* Увеличил отступ */
-            flex-wrap: wrap; /* Позволит перенос, если не помещается */
-            justify-content: center; /* Центрируем на случай переноса */
-        }
-        @media (max-width: 768px) { /* Раньше переключаем на колонку */
-            .header {
-                flex-direction: column;
-                text-align: center;
-                gap: 15px;
-                margin-bottom: 40px;
-            }
+        .header-container {
+        max-width: 800px; /* Ширина контейнера форм */
+        margin: 0 auto; /* Центрирование контейнера */
+        margin-bottom: 30px; /* Отступ до основного контента */
         }
 
-        .logo {
-            width: 150px; /* Уменьшил */
-            height: 150px; /* Уменьшил */
-            border-radius: 20px;
-            object-fit: cover; /* Добавил на случай неквадратного лого */
-            flex-shrink: 0; /* Чтобы лого не сжималось */
-        }
-        @media (max-width: 640px) {
-            .logo {
-                width: 120px;
-                height: 120px;
-            }
-        }
+    .header-nav {
+        margin-top: 20px;
+
+        background-color: #da6886;
+        color:rgb(255, 255, 255); /* Основной цвет текста шапки */
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(167, 49, 81, 0.1);
+    }
+
+    .brand-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-decoration: none;
+    }
+
+    .logo {
+        width: 80px;
+        height: auto;
+        border-radius: 10px;
+        object-fit: contain;
+        object-position: center;
+    }
+
+    .brand-name {
+        color:rgb(255, 255, 255);
+        letter-spacing: 4px;
+        font-size: 24px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    .brand-quality,
+    .brand-elegance {
+        letter-spacing: 3px;
+        color:rgb(255, 255, 255);
+        display: block;
+        margin-top: 3px;
+        font-size: 16px;
+    }
+
+    .nav-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .nav-button {
+        padding: 10px 18px;
+        background-color:#a73151;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        transition: background-color 0.3s ease;
+        border: none;
+        cursor: pointer;
+    }
+
+    .nav-button:hover {
+        background-color: #c95a77;
+    }
+
+    .nav-button.profile {
+        background-color: #a73151;
+    }
+
+    .nav-button.logout {
+        background-color: #a73151;
+    }
 
         .salon-info {
             display: flex;
             flex-direction: column;
-            align-items: center; /* На мобильных уже отцентрировано через .header */
-            text-align: center; /* Добавил для мобильных */
+            align-items: center; /* <-- ИЗМЕНЕНО: Всегда центрируем элементы внутри */
+            text-align: center; /* <-- ИЗМЕНЕНО: Всегда центрируем текст */
         }
-        @media (min-width: 769px) { /* На больших экранах выравнивание по левому краю */
+
+        /* УДАЛЕНО: Медиа-запрос для выравнивания по левому краю на больших экранах */
+        /*
+        @media (min-width: 769px) {
             .salon-info {
                 align-items: flex-start;
                 text-align: left;
             }
         }
-
+        */
 
         .salon-name {
             color: #881d3a;
-            letter-spacing: 8px; /* Уменьшил */
-            margin-bottom: 10px;
-            font-size: 56px; /* Немного уменьшил */
-            font-weight: 700; /* Используем Montserrat Bold */
-            font-family: 'Montserrat', sans-serif; /* Явно указываем Montserrat */
+            letter-spacing: 6px;
+            margin-bottom: 8px;
+            font-size: 40px;
+            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
         }
+
         @media (max-width: 991px) {
             .salon-name {
-                font-size: 44px;
+                font-size: 32px;
             }
         }
+
         @media (max-width: 640px) {
             .salon-name {
-                font-size: 32px;
-                letter-spacing: 5px;
+                font-size: 24px;
+                letter-spacing: 4px;
             }
         }
 
         .salon-address {
             color: #a73151;
-            letter-spacing: 4px; /* Уменьшил */
-            font-size: 28px; /* Уменьшил */
-            font-family: 'Montserrat', sans-serif; /* Явно указываем Montserrat */
+            letter-spacing: 3px;
+            font-size: 20px;
+            font-family: 'Montserrat', sans-serif;
         }
+
         @media (max-width: 991px) {
             .salon-address {
-                font-size: 22px;
+                font-size: 16px;
             }
         }
+
         @media (max-width: 640px) {
             .salon-address {
-                font-size: 18px;
-                letter-spacing: 3px;
+                font-size: 14px;
+                letter-spacing: 2px;
             }
         }
 
         .services-container {
             display: flex;
             flex-direction: column;
-            gap: 40px; /* Уменьшил */
+            gap: 30px;
+            align-items: center; /* <-- Уже было: Центрируем дочерние элементы */
         }
 
         .service-item {
             display: flex;
             align-items: center;
-            gap: 60px; /* Уменьшил */
-            /* font-family: 'Kyiv Type Serif'; Убрано отсюда, применяем ниже */
+            gap: 40px;
+            max-width: 800px; /* <-- Уже было: Максимальная ширина блока услуги */
+            width: 100%;      /* <-- Уже было: Блок услуги будет занимать 100% до max-width */
         }
+
         @media (max-width: 991px) {
             .service-item {
                 flex-direction: column;
-                gap: 30px;
+                gap: 20px;
                 align-items: center;
-                text-align: center; /* Центрируем текст под картинкой */
+                text-align: center;
             }
         }
 
         .service-image {
-            /* width: 629px; Убрано, используем flex/max-width */
-            /* height: 566px; Убрано */
-            max-width: 50%; /* Занимает половину ширины */
-            width: 100%; /* Для корректной работы max-width */
-            height: auto; /* Автоматическая высота */
-            aspect-ratio: 629 / 566; /* Сохраняем пропорции */
-            border-radius: 20px;
+            max-width: 40%;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 629 / 566;
+            border-radius: 15px;
             object-fit: cover;
-            flex-shrink: 0; /* Чтобы картинка не сжималась сильнее текста */
+            flex-shrink: 0;
         }
+
         @media (max-width: 991px) {
             .service-image {
-                max-width: 100%; /* На мобильных занимает всю ширину */
-                aspect-ratio: 16 / 10; /* Можно задать другое соотношение для моб */
+                max-width: 100%;
+                aspect-ratio: 16 / 10;
             }
         }
+         @media (max-width: 600px) { /* Чтобы картинка не была слишком большой на узких экранах */
+             .service-image {
+                 max-width: 350px; /* Или другое значение */
+             }
+         }
 
         .service-details {
             display: flex;
             flex-direction: column;
-            align-items: center; /* Центрируем текст */
-            gap: 15px; /* Уменьшил */
-            font-family: 'Kyiv Type Serif', serif; /* <--- ПРИМЕНЯЕМ ШРИФТ ЗДЕСЬ */
-            flex-grow: 1; /* Позволяет блоку занять оставшееся место */
+            align-items: center; /* <-- ИЗМЕНЕНО: Всегда центрируем элементы внутри details (для кнопок, текста) */
+            gap: 10px;
+            font-family: 'Kyiv Type Serif', serif;
+            flex-grow: 1;
+            text-align: center; /* <-- НОВОЕ: Центрируем текст внутри details */
         }
-        @media (min-width: 992px) { /* На больших экранах выравнивание по левому краю */
+
+        /* УДАЛЕНО: Медиа-запрос для выравнивания по левому краю на больших экранах */
+        /*
+        @media (min-width: 992px) {
             .service-details {
                 align-items: flex-start;
             }
         }
+        */
         @media (max-width: 991px) {
             .service-details {
-                width: 100%; /* Занимает всю ширину под картинкой */
+                width: 100%; /* Под картинкой занимает всю ширину (внутри service-item) */
             }
         }
 
         .service-name {
+            font-family: 'Montserrat';
             color: #a73151;
-            font-size: 48px; /* Уменьшил */
-            /* font-family: 'Kyiv Type Serif'; Наследуется от .service-details */
-            font-weight: normal; /* Убрал жирность, если не нужна от font */
+            font-size: 32px;
+            font-weight: normal;
         }
+
         @media (max-width: 991px) {
             .service-name {
-                font-size: 32px;
+                font-size: 24px;
             }
         }
+
         @media (max-width: 640px) {
             .service-name {
-                font-size: 26px;
+                font-size: 20px;
             }
         }
 
         .service-duration {
             color: #a73151;
-            font-size: 32px; /* Уменьшил */
-            /* font-family: 'Kyiv Type Serif'; Наследуется от .service-details */
+            font-size: 24px;
             font-weight: normal;
-            font-family: 'Montserrat', sans-serif; /* Вернул Montserrat для длительности */
+            font-family: 'Montserrat', sans-serif;
         }
+
         @media (max-width: 991px) {
             .service-duration {
-                font-size: 22px;
+                font-size: 18px;
             }
         }
+
         @media (max-width: 640px) {
             .service-duration {
-                font-size: 18px;
+                font-size: 16px;
             }
         }
 
         .service-divider {
             height: 1px;
-            margin: 40px 0; /* Уменьшил */
+            margin: 30px auto; /* <-- Уже было: 'auto' для горизонтального центрирования */
             background-color: #a73151;
-            border: none; /* Убираем рамку у hr */
-            width: 100%; /* Растягиваем на всю ширину */
+            border: none;
+            max-width: 800px; /* <-- Уже было: Максимальная ширина, как у service-item */
+            width: 100%; /* <-- Уже было: Занимает 100% до max-width */
         }
 
         .footer {
             display: flex;
-            align-items: flex-start; /* Лого и контакты по верху */
-            justify-content: space-between; /* Распределяем по краям */
-            gap: 40px; /* Отступ между элементами */
-            margin-top: 80px; /* Уменьшил */
-            flex-wrap: wrap; /* Разрешаем перенос */
+            align-items: center; /* <-- ИЗМЕНЕНО: Центрируем элементы по вертикали */
+            justify-content: center; /* <-- ИЗМЕНЕНО: Центрируем элементы как группу по горизонтали */
+            gap: 30px;
+            margin-top: 60px;
+            flex-wrap: wrap;
         }
-        @media (max-width: 768px) { /* Раньше переключаем на колонку */
+
+        @media (max-width: 768px) {
             .footer {
                 flex-direction: column;
-                align-items: center;
-                gap: 30px;
-                text-align: center;
-                margin-top: 50px;
+                /* align-items: center; - Уже центрировано благодаря justify-content на маленьких экранах */
+                gap: 20px;
+                /* text-align: center; - Уже центрировано благодаря align-items в дочерних блоках */
+                margin-top: 40px;
             }
         }
 
-        .footer .logo { /* Стили для лого в футере */
-            width: 100px;
-            height: 100px;
+        .footer .logo {
+            width: 80px;
+            height: 80px;
         }
 
         .contact-info {
             display: flex;
             flex-direction: column;
-            align-items: flex-end; /* Выравниваем по правому краю */
+            align-items: center; /* <-- ИЗМЕНЕНО: Всегда центрируем контакты */
         }
+
+        /* УДАЛЕНО: Медиа-запрос для выравнивания по правому краю на больших экранах */
+        /*
         @media (max-width: 768px) {
             .contact-info {
-                align-items: center; /* На мобильных центрируем */
+                align-items: center;
             }
         }
+        */
 
         .contact-phone {
             color: #a73151;
-            letter-spacing: 3px; /* Уменьшил */
-            margin-bottom: 20px; /* Уменьшил */
-            font-size: 22px; /* Уменьшил */
-            font-family: 'Montserrat', sans-serif; /* Явно указываем Montserrat */
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-family: 'Montserrat', sans-serif;
         }
+
         @media (max-width: 640px) {
             .contact-phone {
-                font-size: 18px;
+                font-size: 16px;
             }
         }
 
         .social-links {
             display: flex;
             flex-direction: column;
-            align-items: flex-end; /* Выравниваем по правому краю */
-            gap: 15px; /* Уменьшил */
+            align-items: center; /* <-- ИЗМЕНЕНО: Всегда центрируем соц. сети */
+            gap: 10px;
         }
+
+        /* УДАЛЕНО: Медиа-запрос для выравнивания по правому краю на больших экранах */
+        /*
         @media (max-width: 768px) {
             .social-links {
-                align-items: center; /* На мобильных центрируем */
+                align-items: center;
             }
         }
+        */
 
         .social-link {
             color: #a73151;
-            letter-spacing: 3px; /* Уменьшил */
-            font-size: 20px; /* Уменьшил */
-            font-family: 'Montserrat', sans-serif; /* Явно указываем Montserrat */
-            text-decoration: none; /* Убираем подчеркивание */
-            transition: color 0.3s ease; /* Плавный ховер */
+            letter-spacing: 2px;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
+
         .social-link:hover {
-            color: #881d3a; /* Цвет при наведении */
+            color: #881d3a;
         }
+
         @media (max-width: 640px) {
             .social-link {
-                font-size: 16px;
+                font-size: 14px;
             }
         }
 
-        /* Класс визуально скрытого контента */
         .visually-hidden {
             position: absolute;
             width: 1px;
@@ -316,38 +401,63 @@
             white-space: nowrap;
             border: 0;
         }
+
         .button {
-            display: block; /* Занимает всю доступную ширину по умолчанию */
-            width: 100%; /* Важно для блочного элемента в flex-контейнере */
-            max-width: 600px; /* Максимальная ширина кнопки */
-            padding: 15px 20px; /* Внутренние отступы */
-            border-radius: 15px;
+            display: block; /* Сделаем кнопки блочными для работы margin: auto */
+            width: 100%;
+            max-width: 300px;
+            padding: 12px 18px;
+            border-radius: 10px;
             background-color: #da6886;
             color: #fff;
-            text-decoration: none; /* Убираем подчеркивание у ссылок */
+            text-decoration: none;
             border: none;
             cursor: pointer;
-            font-family: 'Montserrat', sans-serif; /* Применяем Montserrat к кнопкам */
-            font-size: 20px;
-            letter-spacing: 5px;
-            text-transform: uppercase; /* Можно сделать заглавными буквами */
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
             text-align: center;
             transition: background-color 0.3s ease;
             box-sizing: border-box;
+            margin: 10px auto 0; /* <-- ИЗМЕНЕНО: Центрируем кнопку с верхним отступом, нижний 0 */
         }
+         .button:first-of-type {
+             margin-top: 0; /* <-- НОВОЕ: Убираем верхний отступ у первой кнопки в группе */
+         }
+
 
     </style>
 </head>
 <body>
 
 <div class="salon-container">
-    <header class="header">
-        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2166173af264b6b233ee79ec2f0ed8858f630d0c" alt="Логотип Nails.iirk" class="logo">
-        <div class="salon-info">
-            <h1 class="salon-name">Nails.iirk</h1>
-            <p class="salon-address">ул. Розы Люксембург 227, подъезд 2</p>
+<div class="header-container">
+            <div class="header-nav">
+                <a href="{{ route('main') }}" class="brand-container">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/27234bd614096077bf3ab6f70411fd2f7e8a3467?placeholderIfAbsent=true&apiKey=1f1e2d1492e74be8b445b694e3a68aae"
+                        class="logo" alt="Логотип Nails.iirk">
+                    <div>
+                        <div class="brand-name">nails.iirk</div>
+                        <span class="brand-quality">качество</span>
+                        <span class="brand-elegance">изящность</span>
+                    </div>
+                </a>
+
+                <div class="nav-buttons">
+                    @auth
+                        <a href="{{ route('profile.edit') }}" class="nav-button profile">Профиль</a>
+                        <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
+                            @csrf
+                            <button type="submit" class="nav-button logout" style="cursor: pointer;">Выйти</button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" class="nav-button">Вход</a>
+                        <a href="{{ route('register') }}" class="nav-button">Регистрация</a>
+                    @endauth
+                </div>
+            </div>
         </div>
-    </header>
 
     <main class="services-container">
         <section class="service-item">
@@ -355,11 +465,11 @@
             <div class="service-details">
                 <h2 class="service-name">Наращивание 2100Р</h2>
                 <p class="service-duration">2 часа 30 минут</p>
-                @auth
-                    <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
-                @else
-                    <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
-                @endauth
+                 @auth
+                     <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
+                 @else
+                     <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
+                 @endauth 
                 <a href="{{ route('main') }}" class="button">На главную </a>
             </div>
         </section>
@@ -370,12 +480,12 @@
             <div class="service-details">
                 <h2 class="service-name">Коррекция 2000Р</h2>
                 <p class="service-duration">2 часа</p>
-                @auth
-                    <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
-                @else
-                    <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
-                @endauth
-                <a href="{{ route('main') }}" class="button">На главную </a>
+                 @auth
+                     <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
+                 @else
+                     <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
+                 @endauth
+                <a href="#example-main-link" class="button">На главную </a>
             </div>
         </section>
 
@@ -385,18 +495,17 @@
             <div class="service-details">
                 <h2 class="service-name">Укрепление 1500Р</h2>
                 <p class="service-duration">1 час 30 мин</p>
-                @auth
-                    <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
-                @else
-                    <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
-                @endauth
-                <a href="{{ route('main') }}" class="button">На главную </a>
+               @auth
+                     <a href="{{ route('bookings.index') }}" class="button">Записаться онлайн</a>
+                 @else
+                     <a href="{{ route('register') }}" class="button">Записаться онлайн</a>
+                 @endauth 
+                <a href="#example-main-link" class="button">На главную </a>
             </div>
         </section>
     </main>
 
-    <hr class="service-divider">
-    <footer class="footer">
+    <hr class="service-divider"> <footer class="footer">
         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2166173af264b6b233ee79ec2f0ed8858f630d0c" alt="Логотип Nails.iirk" class="logo">
         <div class="contact-info">
             <p class="contact-phone">Связаться с нами: 89025497599</p>

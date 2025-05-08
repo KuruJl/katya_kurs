@@ -31,7 +31,7 @@ class BookingController extends Controller
         Carbon::setLocale('ru');
         
         $viewStartDate = Carbon::parse($request->input('start_date', Carbon::today()))->startOfDay();
-        $viewEndDate = $viewStartDate->copy()->addDays(13)->endOfDay();
+        $viewEndDate = $viewStartDate->copy()->addDays(12)->endOfDay();
 
         $slotIntervalMinutes = 150;
         $workingHoursStart = 8;

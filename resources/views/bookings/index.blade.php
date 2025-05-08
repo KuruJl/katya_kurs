@@ -141,128 +141,116 @@
             font-style: italic;
             padding: 10px;
         }
-        .header-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
+        .header-container {
+        max-width: 600px; /* Ширина контейнера форм */
+        margin: 0 auto; /* Центрирование контейнера */
+        margin-bottom: 30px; /* Отступ до основного контента */
+    }
 
-        .brand-container {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            text-decoration: none;
-        }
+    .header-nav {
+        background-color: #f8bbd0; /* Светло-розовый фон шапки */
+        color: #a73151; /* Основной цвет текста шапки */
+        padding: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 15px;
+        box-shadow: 0 4px 8px rgba(167, 49, 81, 0.1);
+    }
 
-        .logo {
-            width: 100px;
-            height: auto;
-            border-radius: 15px;
-            object-fit: contain;
-            object-position: center;
-        }
-        @media (min-width: 768px) {
-            .logo {
-                width: 120px;
-            }
-        }
-        .brand-name {
-            color: #a73151;
-            letter-spacing: 6px;
-            font-size: 28px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-        .brand-quality,
-        .brand-elegance {
-            letter-spacing: 5px;
-            color: #a73151;
-            display: block;
-            margin-top: 5px;
-            font-size: 18px;
-            font-weight: 400;
-        }
+    .brand-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-decoration: none;
+    }
 
-        .nav-buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+    .logo {
+        width: 80px;
+        height: auto;
+        border-radius: 10px;
+        object-fit: contain;
+        object-position: center;
+    }
 
-        .nav-button {
-            padding: 12px 20px;
-            background-color: #da6886;
-            color: white;
-            text-decoration: none;
-            border-radius: 15px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
-            text-align: center;
-            border: 2px solid transparent;
-        }
+    .brand-name {
+        color: #a73151;
+        letter-spacing: 4px;
+        font-size: 24px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
 
-        .nav-button:hover {
-            background-color: #c95a77;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(167, 49, 81, 0.2);
-        }
+    .brand-quality,
+    .brand-elegance {
+        letter-spacing: 3px;
+        color: #c95a77;
+        display: block;
+        margin-top: 3px;
+        font-size: 16px;
+    }
 
-        .nav-button.profile {
-            background-color: #a73151;
-        }
+    .nav-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 
-        .nav-button.logout {
-            background-color: #881d3a;
-        }
+    .nav-button {
+        padding: 10px 18px;
+        background-color: #da6886;
+        color: white;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        transition: background-color 0.3s ease;
+        border: none;
+        cursor: pointer;
+    }
 
-        /* Адаптивность */
-        @media (max-width: 768px) {
-            .header-nav {
-                flex-direction: column;
-            }
+    .nav-button:hover {
+        background-color: #c95a77;
+    }
 
-            .nav-buttons {
-                width: 100%;
-            }
+    .nav-button.profile {
+        background-color: #a73151;
+    }
 
-            .nav-button {
-                flex-grow: 1;
-            }
-        }
+    .nav-button.logout {
+        background-color: #a73151;
+    }
     </style>
 </head>
 <body>
-<div class="header-nav" >
-    <a href="{{ route('main') }}" class="brand-container">
-        <img     src="https://cdn.builder.io/api/v1/image/assets/TEMP/27234bd614096077bf3ab6f70411fd2f7e8a3467?placeholderIfAbsent=true&apiKey=1f1e2d1492e74be8b445b694e3a68aae"
-                class="logo"
-                alt="Логотип Nails.iirk">
-        <div>
-            <div class="brand-name">nails.iirk</div>
-            <span class="brand-quality">качество</span>
-            <span class="brand-elegance">изящность</span>
-        </div>
-    </a>
+<div class="header-container">
+            <div class="header-nav">
+                <a href="{{ route('main') }}" class="brand-container">
+                    <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/27234bd614096077bf3ab6f70411fd2f7e8a3467?placeholderIfAbsent=true&apiKey=1f1e2d1492e74be8b445b694e3a68aae"
+                        class="logo" alt="Логотип Nails.iirk">
+                    <div>
+                        <div class="brand-name">nails.iirk</div>
+                        <span class="brand-quality">качество</span>
+                        <span class="brand-elegance">изящность</span>
+                    </div>
+                </a>
 
-    <div class="nav-buttons">
-        
-        @auth
-            <a href="{{ route('profile.edit') }}" class="nav-button profile">Профиль</a>
-            <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
-                @csrf
-                <button type="submit" class="nav-button logout" style="cursor: pointer;">Выйти</button>
-            </form>
-        @else
-            <a href="{{ route('login') }}" class="nav-button">Вход</a>
-            <a href="{{ route('register') }}" class="nav-button">Регистрация</a>
-        @endauth
-    </div>
-</div>
+                <div class="nav-buttons">
+                    @auth
+                        <a href="{{ route('main') }}" class="nav-button profile">Главная</a>
+                        <a href="{{ route('profile.edit') }}" class="nav-button profile">Профиль</a>
+                        <form method="POST" action="{{ route('main') }}" style="margin: 0;">
+                            @csrf
+                            <button type="submit" class="nav-button" style="cursor: pointer;">Выйти</button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}" class="nav-button">Вход</a>
+                        <a href="{{ route('register') }}" class="nav-button">Регистрация</a>
+                    @endauth
+                </div>
+            </div>
+        </div>
 
 <h1>Запись на процедуру</h1>
 

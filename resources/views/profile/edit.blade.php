@@ -10,7 +10,7 @@
     }
 
     .header-nav {
-        background-color: #f8bbd0; /* Светло-розовый фон шапки */
+        background-color: #da6886;
         color: #a73151; /* Основной цвет текста шапки */
         padding: 20px;
         display: flex;
@@ -36,7 +36,7 @@
     }
 
     .brand-name {
-        color: #a73151;
+        color:rgb(255, 255, 255);
         letter-spacing: 4px;
         font-size: 24px;
         font-weight: 600;
@@ -46,7 +46,7 @@
     .brand-quality,
     .brand-elegance {
         letter-spacing: 3px;
-        color: #c95a77;
+        color:rgb(255, 255, 255);
         display: block;
         margin-top: 3px;
         font-size: 16px;
