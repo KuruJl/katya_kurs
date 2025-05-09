@@ -221,6 +221,92 @@
     .nav-button.logout {
         background-color: #a73151;
     }
+    .footer {
+            display: flex;
+            align-items: center; /* <-- ИЗМЕНЕНО: Центрируем элементы по вертикали */
+            justify-content: center; /* <-- ИЗМЕНЕНО: Центрируем элементы как группу по горизонтали */
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                /* align-items: center; - Уже центрировано благодаря justify-content на маленьких экранах */
+                gap: 20px;
+                /* text-align: center; - Уже центрировано благодаря align-items в дочерних блоках */
+                margin-top: 40px;
+            }
+        }
+
+        .footer .logo {
+            width: 80px;
+            height: 80px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* <-- ИЗМЕНЕНО: Всегда центрируем контакты */
+        }
+
+        /* УДАЛЕНО: Медиа-запрос для выравнивания по правому краю на больших экранах */
+        /*
+        @media (max-width: 768px) {
+            .contact-info {
+                align-items: center;
+            }
+        }
+        */
+
+        .contact-phone {
+            color: #a73151;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        @media (max-width: 640px) {
+            .contact-phone {
+                font-size: 16px;
+            }
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* <-- ИЗМЕНЕНО: Всегда центрируем соц. сети */
+            gap: 10px;
+        }
+
+        /* УДАЛЕНО: Медиа-запрос для выравнивания по правому краю на больших экранах */
+        /*
+        @media (max-width: 768px) {
+            .social-links {
+                align-items: center;
+            }
+        }
+        */
+
+        .social-link {
+            color: #a73151;
+            letter-spacing: 2px;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: #881d3a;
+        }
+
+        @media (max-width: 640px) {
+            .social-link {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -301,7 +387,18 @@
             </div>
         @endforeach
     </div>
+    
 </div>
+<footer class="footer">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2166173af264b6b233ee79ec2f0ed8858f630d0c" alt="Логотип Nails.iirk" class="logo">
+        <div class="contact-info">
+            <p class="contact-phone">Связаться с нами: 89025497599</p>
+            <nav class="social-links">
+                <a href="#" class="social-link">Наш VK</a>
+                <a href="#" class="social-link">Наш Instagram</a>
+            </nav>
+        </div>
+    </footer>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

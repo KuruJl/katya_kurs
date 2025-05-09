@@ -505,7 +505,8 @@
         </section>
     </main>
 
-    <hr class="service-divider"> <footer class="footer">
+    <hr class="service-divider"> 
+    <footer class="footer">
         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2166173af264b6b233ee79ec2f0ed8858f630d0c" alt="Логотип Nails.iirk" class="logo">
         <div class="contact-info">
             <p class="contact-phone">Связаться с нами: 89025497599</p>

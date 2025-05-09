@@ -31,11 +31,11 @@ class BookingController extends Controller
         Carbon::setLocale('ru');
         
         $viewStartDate = Carbon::parse($request->input('start_date', Carbon::today()))->startOfDay();
-        $viewEndDate = $viewStartDate->copy()->addDays(12)->endOfDay();
+        $viewEndDate = $viewStartDate->copy()->addDays(13)->endOfDay();
 
         $slotIntervalMinutes = 150;
         $workingHoursStart = 8;
-        $workingHoursEnd = 19;
+        $workingHoursEnd = 21;
 
         // Получаем существующие записи
         $existingBookings = Booking::whereBetween('start_time', [$viewStartDate, $viewEndDate])

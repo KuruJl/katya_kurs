@@ -425,99 +425,85 @@
     }
 
     /* Стилизация футера */
-    .footer-divider {
-      width: 100%;
-      max-width: 800px;
-      height: 1px;
-      background-color: #a73151;
-      border: none;
-      margin: 0 auto;
-    }
-    @media (min-width: 768px) {
-      .footer-divider {
-        height: 2px;
-        max-width: 1000px;
-      }
-    }
+    .footer {
+            display: flex;
+            align-items: center; /* <-- ИЗМЕНЕНО: Центрируем элементы по вертикали */
+            justify-content: center; /* <-- ИЗМЕНЕНО: Центрируем элементы как группу по горизонтали */
+            gap: 30px;
+            flex-wrap: wrap;
+        }
 
-    .footer-wrapper {
-      display: flex;
-      justify-content: center;
-      width: 100%;
-      max-width: 960px;
-      padding: 20px;
-      box-sizing: border-box;
-    }
+        @media (max-width: 768px) {
+            .footer {
+                flex-direction: column;
+                /* align-items: center; - Уже центрировано благодаря justify-content на маленьких экранах */
+                gap: 20px;
+                /* text-align: center; - Уже центрировано благодаря align-items в дочерних блоках */
+                margin-top: 40px;
+            }
+        }
 
-    .footer-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 100%;
-      gap: 20px;
-      font-size: 16px;
-      color: #a73151;
-      letter-spacing: 2px;
-      text-align: center;
-    }
+        .footer .logo {
+            width: 80px;
+            height: 80px;
+        }
 
-    @media (min-width: 768px) {
-      .footer-content {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        font-size: 20px;
-        letter-spacing: 3px;
-        gap: 30px;
-      }
-    }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* <-- ИЗМЕНЕНО: Всегда центрируем контакты */
+        }
 
-    .footer-content .logo {
-      width: 80px;
-      border-radius: 10px;
-    }
-    @media (min-width: 768px) {
-      .footer-content .logo {
-        width: 100px;
-        border-radius: 15px;
-      }
-    }
+        
 
-    .contact-info {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    @media (min-width: 768px) {
-      .contact-info {
-        align-items: flex-end;
-      }
-    }
+        .contact-phone {
+            color: #a73151;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-family: 'Montserrat', sans-serif;
+        }
 
-    .phone-number {
-      margin-bottom: 10px;
-    }
+        @media (max-width: 640px) {
+            .contact-phone {
+                font-size: 16px;
+            }
+        }
 
-    .social-links {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-    @media (min-width: 768px) {
-      .social-links {
-        align-items: flex-end;
-      }
-    }
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* <-- ИЗМЕНЕНО: Всегда центрируем соц. сети */
+            gap: 10px;
+        }
 
-    .social-links a {
-      color: #a73151;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    .social-links a:hover {
-      color: #da6886;
-    }
+        /* УДАЛЕНО: Медиа-запрос для выравнивания по правому краю на больших экранах */
+        /*
+        @media (max-width: 768px) {
+            .social-links {
+                align-items: center;
+            }
+        }
+        */
+
+        .social-link {
+            color: #a73151;
+            letter-spacing: 2px;
+            font-size: 16px;
+            font-family: 'Montserrat', sans-serif;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: #881d3a;
+        }
+
+        @media (max-width: 640px) {
+            .social-link {
+                font-size: 14px;
+            }
+        }
 
     .visually-hidden {
       position: absolute;
@@ -605,22 +591,16 @@
     </div>
 
     <hr class="divider" aria-hidden="true" />
-    <div class="footer-wrapper">
-      <footer class="footer-content">
-        <img
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/27234bd614096077bf3ab6f70411fd2f7e8a3467?placeholderIfAbsent=true&apiKey=1f1e2d1492e74be8b445b694e3a68aae"
-          class="logo"
-          alt="Логотип Nails.iirk в подвале"
-        />
+    <footer class="footer">
+        <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2166173af264b6b233ee79ec2f0ed8858f630d0c" alt="Логотип Nails.iirk" class="logo">
         <div class="contact-info">
-          <div class="phone-number">Связаться с нами: 89025497599</div>
-          <div class="social-links">
-            <a href="https://vk.com/nails.iirk" class="vk-link">Наш VK</a>
-            <a href="https://www.instagram.com/nails.iirk?igsh=ZWYxbHNnYmZsbWp1&utm_source=qr" class="inst-link">Наш Instagram</a>
-          </div>
+            <p class="contact-phone">Связаться с нами: 89025497599</p>
+            <nav class="social-links">
+                <a href="#" class="social-link">Наш VK</a>
+                <a href="#" class="social-link">Наш Instagram</a>
+            </nav>
         </div>
-      </footer>
+    </footer>
     </div>
 
   </div>
