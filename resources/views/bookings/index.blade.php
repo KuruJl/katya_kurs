@@ -326,7 +326,10 @@
                     @auth
                         <a href="{{ route('main') }}" class="nav-button profile">Главная</a>
                         <a href="{{ route('profile.edit') }}" class="nav-button profile">Профиль</a>
-                        <form method="POST" action="{{ route('main') }}" style="margin: 0;">
+                        @if(auth()->user()->is_admin)
+                            <a href="{{ route('admin.bookings.index') }}" class="nav-button profile">Админ-панель</a>
+                        @endif  
+                        <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
                             @csrf
                             <button type="submit" class="nav-button" style="cursor: pointer;">Выйти</button>
                         </form>
@@ -389,6 +392,8 @@
     </div>
     
 </div>
+
+
 <footer class="footer">
         <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/2166173af264b6b233ee79ec2f0ed8858f630d0c" alt="Логотип Nails.iirk" class="logo">
         <div class="contact-info">
@@ -400,22 +405,34 @@
         </div>
     </footer>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const forms = document.querySelectorAll('form');
-
-        forms.forEach(form => {
-            form.addEventListener('submit', function(e) {
-                const time = form.querySelector('button').textContent;
-                const date = form.closest('.day-column').querySelector('.day-header').textContent;
-
-                if (!confirm(`Подтвердите запись на ${date} в ${time}`)) {
-                    e.preventDefault();
-                }
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Выбираем только формы для записи, а не форму выхода из системы
+            const bookingForms = document.querySelectorAll('.booking-container form');
+    
+            bookingForms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    const time = form.querySelector('button').textContent.trim();
+                    
+                    // ===================== НАЧАЛО ИЗМЕНЕНИЙ =====================
+                    
+                    // 1. Получаем "грязный" текст с переносами строк
+                    const dateRaw = form.closest('.day-column').querySelector('.day-header').textContent;
+    
+                    // 2. Очищаем его: убираем пробелы по краям и заменяем все
+                    //    пробельные символы (включая переносы) на один пробел.
+                    const dateClean = dateRaw.trim().replace(/\s+/g, ' ');
+    
+                    // 3. Используем очищенную строку в сообщении
+                    if (!confirm(`Подтвердите запись на ${dateClean} в ${time}`)) {
+                        e.preventDefault();
+                    }
+                    
+                    // ====================== КОНЕЦ ИЗМЕНЕНИЙ ======================
+                });
             });
         });
-    });
-</script>
+    </script>
 
 </body>
 </html>

@@ -26,11 +26,20 @@ Route::get('/service', function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['is_admin'])->group(function () {
-    Route::get('/index', [AdminBookingController::class, 'index'])->name('admin.index');
-    Route::get('/create', [AdminBookingController::class, 'create'])->name('admin.create');
-    Route::post('/create', [AdminBookingController::class, 'store'])->name('admin.store');
-    Route::delete('/{booking}', [AdminBookingController::class, 'destroy'])->name('admin.destroy');
+Route::middleware(['auth', 'is_admin'])->prefix('admin')->name('admin.')->group(function () {
+    // Главная страница админ-панели с сеткой бронирований
+    // URL: /admin/bookings, Имя роута: admin.bookings.index
+    Route::get('/bookings', [AdminBookingController::class, 'index'])->name('bookings.index');
+    
+    // Создание бронирования (админом через сетку)
+    // URL: /admin/bookings (метод POST), Имя роута: admin.bookings.store
+    Route::post('/bookings', [AdminBookingController::class, 'store'])->name('bookings.store');
+    
+    // Удаление/отмена бронирования
+    // URL: /admin/bookings/1 (метод DELETE), Имя роута: admin.bookings.destroy
+    Route::delete('/bookings/{booking}', [AdminBookingController::class, 'destroy'])->name('bookings.destroy');
+
+    Route::post('/bookings/manual', [AdminBookingController::class, 'storeManual'])->name('bookings.store.manual');
 
 });
 

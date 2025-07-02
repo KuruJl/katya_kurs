@@ -535,16 +535,21 @@
 
         <div class="nav-buttons">
           @auth
-            <a href="{{ route('profile.edit') }}" class="nav-button profile">Профиль</a>
-            <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
-              @csrf
-              <button type="submit" class="nav-button logout" style="cursor: pointer;">Выйти</button>
-            </form>
+              @if(auth()->user()->is_admin)
+                  {{-- Убедитесь, что здесь именно такой роут --}}
+                  <a href="{{ route('admin.bookings.index') }}" class="nav-button profile">Админ-панель</a>
+              @endif
+              
+              <a href="{{ route('profile.edit') }}" class="nav-button profile">Профиль</a>
+              <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
+                  @csrf
+                  <button type="submit" class="nav-button logout" style="cursor: pointer;">Выйти</button>
+              </form>
           @else
-            <a href="{{ route('login') }}" class="nav-button">Вход</a>
-            <a href="{{ route('register') }}" class="nav-button">Регистрация</a>
+              <a href="{{ route('login') }}" class="nav-button">Вход</a>
+              <a href="{{ route('register') }}" class="nav-button">Регистрация</a>
           @endauth
-        </div>
+      </div>
       </div>
     </div>
 
