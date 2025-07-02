@@ -14,7 +14,7 @@ class AdminUserSeeder extends Seeder
 
 public function run()
 {
-    User::where('id', 2)->update(['is_admin' => true]);
+    User::where('id', 1)->update(['is_admin' => true]);
     echo "Пользователь #1 назначен администратором!\n";
 }
 }
