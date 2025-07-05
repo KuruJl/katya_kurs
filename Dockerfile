@@ -34,11 +34,15 @@ COPY --from=vendor /app/vendor/ /var/www/html/vendor/
 COPY --from=frontend /app/public/ /var/www/html/public/
 COPY . .
 
-# Копируем нашу конфигурацию Nginx
+# Копируем нашу конфигурацию Nginx и скрипт запуска
 COPY .docker/nginx.conf /etc/nginx/nginx.conf
+COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
+
+# ** НОВЫЙ ВАЖНЫЙ ШАГ: Делаем скрипт запуска исполняемым **
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Выставляем правильные права на папки
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Запускаем Nginx. Railway сам предоставит порт ${PORT}
-CMD ["/usr/sbin/nginx", "-g", "daemon off;"]
+# ** ИЗМЕНЕННАЯ КОМАНДА ЗАПУСКА: Используем наш скрипт **
+CMD ["entrypoint.sh"]
