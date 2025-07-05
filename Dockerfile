@@ -43,7 +43,6 @@ RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Выставляем правильные права на папки
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-RUN php artisan config:clear && php artisan route:clear && php artisan view:clear && php artisan cache:clear
 
 # ** ИЗМЕНЕННАЯ КОМАНДА ЗАПУСКА: Используем наш скрипт **
 CMD ["entrypoint.sh"]
