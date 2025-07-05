@@ -14,7 +14,7 @@ use App\Http\Middleware\CheckAdmin;
  //   })->name('main');  
 
  Route::get('/', function () {
-    return 'Hello from Railway! The app is working.';
+    return 'SUCCESS! The server is working perfectly!';
 });
 
 Route::get('/service', function () {
