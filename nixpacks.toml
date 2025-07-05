@@ -1,6 +1,2 @@
-# Файл конфигурации для сборщика Railway (Nixpacks)
-
-[phases.setup]
-# Используем менеджер пакетов 'apt' для установки системных пакетов
-# В данном случае, мы просим установить Apache
-aptPkgs = ["apache2"]
+[phases.build]
+cmds = ["apt-get update && apt-get install -y apache2"]
