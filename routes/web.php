@@ -9,11 +9,13 @@ use App\Http\Controllers\AdminBookingController;
 use App\Http\Middleware\CheckAdmin;
 
 
-Route::get('/', function () {
-    return view('main'); 
-    })->name('main');  
+// Route::get('/', function () {
+ //   return view('main'); 
+ //   })->name('main');  
 
-
+ Route::get('/', function () {
+    return 'Hello from Railway! The app is working.';
+});
 
 Route::get('/service', function () {
     return view('service');
