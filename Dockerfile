@@ -20,6 +20,8 @@
     # --- ЭТАП 3: Финальный образ ---
     FROM php:8.2-fpm-alpine
     
+    RUN apk add --no-cache nginx netcat-openbsd
+
     # Устанавливаем ТОЛЬКО Nginx. Supervisor больше не нужен.
     RUN apk add --no-cache nginx
     RUN docker-php-ext-install pdo pdo_mysql
