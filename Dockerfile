@@ -1,56 +1,52 @@
-# Эта строка ОБЯЗАТЕЛЬНО должна быть самой первой!
-# Она включает современный движок сборки (BuildKit).
 #syntax=docker/dockerfile:1
 
-# --- ЭТАП 1: Установка PHP зависимостей ('vendor') ---
+# --- ЭТАП 1: vendor ---
     FROM composer:2 as vendor
+    # ... (этот этап не меняется) ...
     WORKDIR /app
-    # Копируем только то, что нужно для установки зависимостей
     COPY database/ database/
     COPY composer.json composer.json
     COPY composer.lock composer.lock
-    RUN composer install \
-        --ignore-platform-reqs \
-        --no-interaction \
-        --no-plugins \
-        --no-scripts \
-        --prefer-dist
+    RUN composer install --ignore-platform-reqs --no-interaction --no-plugins --no-scripts --prefer-dist
     
-    # --- ЭТАП 2: Сборка фронтенда ('frontend') ---
+    # --- ЭТАП 2: frontend ---
     FROM node:18-alpine as frontend
+    # ... (этот этап не меняется) ...
     WORKDIR /app
-    # Копируем файлы для сборки фронтенда
     COPY package.json package-lock.json ./
     RUN npm ci
     COPY . .
     RUN npm run build
     
-    # --- ЭТАП 3: Финальный образ для продакшена ---
+    # --- ЭТАП 3: Финальный образ ---
     FROM php:8.2-fpm-alpine
     
-    # Устанавливаем системные пакеты
-    RUN apk add --no-cache nginx
+    # Устанавливаем Nginx И SUPERVISOR
+    RUN apk add --no-cache nginx supervisor
     
     # Устанавливаем PHP расширения
     RUN docker-php-ext-install pdo pdo_mysql
     
     WORKDIR /var/www/html
     
-    # Копируем собранные зависимости и фронтенд с предыдущих этапов
+    # Копируем артефакты с предыдущих этапов
     COPY --from=vendor /app/vendor/ ./vendor/
     COPY --from=frontend /app/public/ ./public/
-    
-    # Копируем остальной код приложения (все, что не указано в .dockerignore)
     COPY . .
     
-    # Копируем конфигурации и делаем скрипт исполняемым
-    COPY .docker/www.conf /usr/local/etc/php-fpm.d/www.conf  
+    # Копируем ВСЕ конфигурации
+    COPY .docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+    COPY .docker/www.conf /usr/local/etc/php-fpm.d/www.conf
     COPY .docker/nginx.conf /etc/nginx/nginx.conf
-    COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-    RUN chmod +x /usr/local/bin/entrypoint.sh
     
-    # Выставляем правильные права на папки (после того, как все файлы скопированы)
+    # Выставляем права ОДИН РАЗ при сборке
     RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
     
-    # Запускаем наш скрипт
-    CMD ["entrypoint.sh"]
+    # Очищаем кэш и прочее. Мы можем это сделать здесь, т.к. файлы уже на месте
+    RUN php artisan config:clear && \
+        php artisan route:clear && \
+        php artisan view:clear && \
+        php artisan cache:clear
+    
+    # НОВАЯ КОМАНДА ЗАПУСКА
+    CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
