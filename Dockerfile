@@ -45,7 +45,7 @@
         php artisan view:cache
     
     # Указываем, что наш скрипт должен запускаться ПЕРЕД основной командой
-    ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+    # ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
     
     # Основная команда, которая будет передана в entrypoint.sh
-    CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+    CMD ["/usr/local/bin/entrypoint.sh"] 

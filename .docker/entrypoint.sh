@@ -1,28 +1,43 @@
 #!/bin/sh
-# Прекратить выполнение при любой ошибке
 set -e
 
-# Этот скрипт запускается каждый раз при старте контейнера
-# и идеально подходит для инициализации персистентных томов.
+echo "======================================================"
+echo "--- STARTING ULTIMATE DIAGNOSTIC SCRIPT ---"
+echo "======================================================"
+echo "Current user: $(whoami)"
+echo "Working directory: $(pwd)"
+echo ""
 
-echo "--- Initializing storage volume ---"
+echo "--- 1. STATE OF '/var/www/html/storage' BEFORE ANY ACTION ---"
+# Рекурсивно показываем все содержимое папки storage
+ls -laR /var/www/html/storage || echo "!!! DIRECTORY /var/www/html/storage DOES NOT EXIST !!!"
+echo ""
 
-# Создаем все необходимые директории Laravel, если их нет
+echo "--- 2. ATTEMPTING TO CREATE DIRECTORIES AND FILE ---"
 mkdir -p /var/www/html/storage/framework/sessions
 mkdir -p /var/www/html/storage/framework/views
 mkdir -p /var/www/html/storage/framework/cache
 mkdir -p /var/www/html/storage/logs
+echo "mkdir commands executed."
 
-# Создаем сам лог-файл, если его нет
 touch /var/www/html/storage/logs/laravel.log
+echo "touch command for laravel.log executed."
+echo ""
 
-# Выставляем правильные права на всю папку storage и bootstrap/cache
-# Это нужно делать здесь, так как том монтируется с правами root
-chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+echo "--- 3. STATE OF '/var/www/html/storage' AFTER ACTIONS ---"
+# Снова рекурсивно показываем все содержимое
+ls -laR /var/www/html/storage || echo "!!! DIRECTORY /var/www/html/storage STILL DOES NOT EXIST !!!"
+echo ""
 
-echo "--- Initialization complete. Handing over to CMD. ---"
+echo "--- 4. ATTEMPTING TO 'cat' THE FILE WE JUST CREATED ---"
+cat /var/www/html/storage/logs/laravel.log || echo "!!! CAT FAILED - laravel.log NOT FOUND !!!"
+echo "(If you see nothing above this line, 'cat' worked on an empty file)"
+echo ""
 
-# Эта команда выполняет то, что указано в CMD вашего Dockerfile
-# (в нашем случае, она запустит supervisord)
-exec "$@"
+echo "======================================================"
+echo "--- DIAGNOSTIC SCRIPT FINISHED. SLEEPING. ---"
+echo "======================================================"
+
+# Мы не запускаем supervisord, чтобы ничего не мешало диагностике.
+# Контейнер просто будет работать 10 минут.
+sleep 600
