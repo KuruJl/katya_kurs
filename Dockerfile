@@ -32,7 +32,7 @@
     
     # Копируем только то, что нужно
     COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-    COPY .docker/nginx.conf /etc/nginx/http.d/default.conf # <-- Обратите внимание на путь!
+    COPY .docker/nginx.conf /etc/nginx/http.d/default.conf 
     
     RUN chmod +x /usr/local/bin/entrypoint.sh
     COPY .env.example .env
