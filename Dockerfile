@@ -1,4 +1,5 @@
 #syntax=docker/dockerfile:1
+# Trigger rebuild: 2025-07-06 08:00
 
 # --- ЭТАП 1: Установка PHP зависимостей ('vendor') ---
     FROM composer:2 as vendor
@@ -41,14 +42,13 @@
     COPY .env.example .env
     
     # Выставляем права ОДИН РАЗ при сборке
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-
-# ---> ДОБАВЬТЕ ЭТИ ДВЕ СТРОКИ <---
-# Создаем пустой лог-файл для PHP-FPM и даем на него права
-RUN touch /var/log/fpm-php.www.log && chown www-data:www-data /var/log/fpm-php.www.log
-
-# Создаем кэш для продакшена
-RUN php artisan config:cache && \
+    RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+    
+    # Создаем пустой лог-файл для PHP-FPM и даем на него права
+    RUN touch /var/log/fpm-php.www.log && chown www-data:www-data /var/log/fpm-php.www.log
+    
+    # Создаем кэш для продакшена
+    RUN php artisan config:cache && \
         php artisan route:cache && \
         php artisan view:cache
     
