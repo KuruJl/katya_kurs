@@ -1,5 +1,5 @@
 #syntax=docker/dockerfile:1
-# Trigger rebuild: 2025-07-06 08:00
+# Trigger rebuild: 2025-07-06 08:15
 
 # --- ЭТАП 1: Установка PHP зависимостей ('vendor') ---
     FROM composer:2 as vendor
@@ -21,7 +21,7 @@
     FROM php:8.2-fpm-alpine
     
     # Устанавливаем Nginx И SUPERVISOR
-    RUN apk add --no-cache nginx supervisor
+    RUN apk add --no-cache nginx supervisor sed
     
     # Устанавливаем PHP расширения
     RUN docker-php-ext-install pdo pdo_mysql
@@ -46,6 +46,9 @@
     
     # Создаем пустой лог-файл для PHP-FPM и даем на него права
     RUN touch /var/log/fpm-php.www.log && chown www-data:www-data /var/log/fpm-php.www.log
+    
+    # === ГЛАВНОЕ ИЗМЕНЕНИЕ: ИСПРАВЛЯЕМ ГЛОБАЛЬНЫЙ КОНФИГ PHP-FPM ===
+    RUN sed -i 's#error_log = /proc/self/fd/2#error_log = /var/log/fpm-php.www.log#' /usr/local/etc/php-fpm.conf
     
     # Создаем кэш для продакшена
     RUN php artisan config:cache && \
