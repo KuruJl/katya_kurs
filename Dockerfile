@@ -1,24 +1,22 @@
 #syntax=docker/dockerfile:1
 
-# --- ЭТАП 1: vendor ---
+# --- ЭТАП 1: Установка PHP зависимостей ('vendor') ---
     FROM composer:2 as vendor
-    # ... (этот этап не меняется) ...
     WORKDIR /app
     COPY database/ database/
     COPY composer.json composer.json
     COPY composer.lock composer.lock
-    RUN composer install --ignore-platform-reqs --no-interaction --no-plugins --no-scripts --prefer-dist
+    RUN composer install --no-dev --no-interaction --no-plugins --no-scripts --prefer-dist
     
-    # --- ЭТАП 2: frontend ---
+    # --- ЭТАП 2: Сборка фронтенда ('frontend') ---
     FROM node:18-alpine as frontend
-    # ... (этот этап не меняется) ...
     WORKDIR /app
     COPY package.json package-lock.json ./
     RUN npm ci
     COPY . .
     RUN npm run build
     
-    # --- ЭТАП 3: Финальный образ ---
+    # --- ЭТАП 3: Финальный образ для продакшена ---
     FROM php:8.2-fpm-alpine
     
     # Устанавливаем Nginx И SUPERVISOR
@@ -34,21 +32,21 @@
     COPY --from=frontend /app/public/ ./public/
     COPY . .
     
-    # Копируем ВСЕ конфигурации
+    # Копируем конфигурации
     COPY .docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
     COPY .docker/www.conf /usr/local/etc/php-fpm.d/www.conf
     COPY .docker/nginx.conf /etc/nginx/nginx.conf
     
+    # Копируем .env.example, чтобы artisan мог работать
+    COPY .env.example .env
+    
     # Выставляем права ОДИН РАЗ при сборке
     RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
     
-    COPY .env.example .env
-
-    # Очищаем кэш и прочее. Мы можем это сделать здесь, т.к. файлы уже на месте
-    RUN php artisan config:clear && \
-        php artisan route:clear && \
-        php artisan view:clear && \
-        php artisan cache:clear
+    # Создаем кэш для продакшена
+    RUN php artisan config:cache && \
+        php artisan route:cache && \
+        php artisan view:cache
     
-    # НОВАЯ КОМАНДА ЗАПУСКА
+    # Запускаем все через supervisor
     CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
