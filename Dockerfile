@@ -42,6 +42,8 @@
     # Выставляем права ОДИН РАЗ при сборке
     RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
     
+    COPY .env.example .env
+
     # Очищаем кэш и прочее. Мы можем это сделать здесь, т.к. файлы уже на месте
     RUN php artisan config:clear && \
         php artisan route:clear && \
