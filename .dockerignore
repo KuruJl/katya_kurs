@@ -1,2 +1,15 @@
-# Игнорируем логи, чтобы они не попадали в Docker-образ
-storage/logs/*.log
+.git
+.github
+.env
+.env.example
+.styleci.yml
+.editorconfig
+/node_modules
+/public/hot
+/public/storage
+/storage/*.log
+/vendor
+Dockerfile
+.dockerignore
+docker-compose.yml
+README.md

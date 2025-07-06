@@ -1,48 +1,31 @@
-# Этап 1: Установка PHP зависимостей с помощью Composer
-FROM composer:2 as vendor
-
-WORKDIR /app
-COPY database/ database/
-COPY composer.json composer.json
-COPY composer.lock composer.lock
-RUN composer install \
-    --ignore-platform-reqs \
-    --no-interaction \
-    --no-plugins \
-    --no-scripts \
-    --prefer-dist
-
-# Этап 2: Сборка фронтенда с помощью Node.js
-FROM node:18-alpine as frontend
-
-WORKDIR /app
-COPY . .
-RUN npm ci && npm run build
-
 # Этап 3: Финальный образ для продакшена с Nginx и PHP-FPM
 FROM php:8.2-fpm-alpine
 
-# Устанавливаем системные пакеты: Nginx и утилиты
 RUN apk add --no-cache nginx
-
-# Устанавливаем необходимые PHP расширения
 RUN docker-php-ext-install pdo pdo_mysql
 
-# Копируем код приложения и собранные зависимости
 WORKDIR /var/www/html
-COPY --from=vendor /app/vendor/ /var/www/html/vendor/
-COPY --from=frontend /app/public/ /var/www/html/public/
+
+# Копируем сначала composer.json и composer.lock, чтобы кэшировать зависимости
+COPY composer.json composer.lock ./
+
+# Копируем зависимости с этапа 'vendor'
+COPY --from=vendor /app/vendor/ ./vendor/
+
+# Копируем собранный фронтенд
+COPY --from=frontend /app/public/ ./public/
+
+# Копируем остальной код приложения (благодаря .dockerignore, мусор не попадет)
 COPY . .
 
-# Копируем нашу конфигурацию Nginx и скрипт запуска
+# Копируем конфигурацию Nginx и скрипт запуска
 COPY .docker/nginx.conf /etc/nginx/nginx.conf
 COPY .docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-
-# ** НОВЫЙ ВАЖНЫЙ ШАГ: Делаем скрипт запуска исполняемым **
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Выставляем правильные права на папки
+# Важно: делаем это после того, как все файлы скопированы
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 
-# ** ИЗМЕНЕННАЯ КОМАНДА ЗАПУСКА: Используем наш скрипт **
+# Запускаем наш скрипт
 CMD ["entrypoint.sh"]
